@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Vpn快速搭建-副本-2 | banbu1118</title>
+<meta name="keywords" content="">
+<meta name="description" content="vpn快速搭建 注意事项 购买国外云服务器（香港和澳门的服务器也不推荐） 推荐使用腾讯云或阿里云的抢占式云服务器，价格便宜，注意实例释放时间！！！！ ssr 参考链接：https://thetowerinfo.com/zh/setup-shadowsocks-server-china/ 获取ssr安装脚本 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh 赋予执行权限 chmod &#43;x shadowsocks-all.sh 运行脚本 ./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log 脚本选项 1.选择ShadowsocksR 2.为SSR设置密码 3.设置SSR端口，推荐443，可以多设备连接 4.加密方式，选择chacha20-ietf 5.传输协议，选择auth_sha1_v4_compatible 6.混淆模式，选择http_simple_compatible 7.任意键盘继续 8.保存相关参数，以便客户端连接使用 mac客户端：https://github.com/shadowsocksrr/electron-ssr/releases windows客户端：https://github.com/shadowsocksrr/shadowsocksr-csharp/releases ios客户端：Potatso Lite或Shadowrocket，国内用户需要注册一个海外账号，因为中国版的App Store里已经下架了所有VPN应用 安卓客户端：https://github.com/shadowsocksrr/shadowsocksr-android/releases v2ray 参考连接：https://thetowerinfo.com/zh/v2ray-tutorial/ 更新系统并安装curl apt-get update -y &amp;&amp; apt-get install curl -y v2ray一键安装脚本 bash &lt;(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) 配置v2ray 获取uuid cat /proc/sys/kernel/random/uuid 创建编辑v2ray配置文件 vi /usr/local/etc/v2ray/config.json 删除config.json内容，粘贴上以下内容 { &#34;inbounds&#34;: [ { &#34;port&#34;: 16832, // 服务器端口，建议设置为443，支持多设备连接 &#34;protocol&#34;: &#34;vmess&#34;, &#34;settings&#34;: { &#34;clients&#34;: [ { &#34;id&#34;: &#34;b831381d-6324-4d53-ad4f-8cda68b30851&#34;, // 用户 ID， &#34;alterId&#34;: 0 } ] } } ], &#34;outbounds&#34;: [ { &#34;protocol&#34;: &#34;freedom&#34;, &#34;settings&#34;: {} } ] } 启动v2ray systemctl start v2ray 如果修改了配置文件， 需要重启生效 systemctl restart v2ray 安装Google BBR拥堵控制算法来为V2Ray服务器加速（选做） wget --no-check-certificate https://github.">
+<meta name="author" content="">
+<link rel="canonical" href="https://github.com/banbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA-%E5%89%AF%E6%9C%AC-2/">
+<link crossorigin="anonymous" href="/banbu1118.github.io/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css" integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U&#43;6hYRq/Ez/nm5vg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/banbu1118.github.io/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://github.com/banbu1118.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://github.com/banbu1118.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://github.com/banbu1118.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://github.com/banbu1118.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://github.com/banbu1118.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Vpn快速搭建-副本-2" />
+<meta property="og:description" content="vpn快速搭建 注意事项 购买国外云服务器（香港和澳门的服务器也不推荐） 推荐使用腾讯云或阿里云的抢占式云服务器，价格便宜，注意实例释放时间！！！！ ssr 参考链接：https://thetowerinfo.com/zh/setup-shadowsocks-server-china/ 获取ssr安装脚本 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh 赋予执行权限 chmod &#43;x shadowsocks-all.sh 运行脚本 ./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log 脚本选项 1.选择ShadowsocksR 2.为SSR设置密码 3.设置SSR端口，推荐443，可以多设备连接 4.加密方式，选择chacha20-ietf 5.传输协议，选择auth_sha1_v4_compatible 6.混淆模式，选择http_simple_compatible 7.任意键盘继续 8.保存相关参数，以便客户端连接使用 mac客户端：https://github.com/shadowsocksrr/electron-ssr/releases windows客户端：https://github.com/shadowsocksrr/shadowsocksr-csharp/releases ios客户端：Potatso Lite或Shadowrocket，国内用户需要注册一个海外账号，因为中国版的App Store里已经下架了所有VPN应用 安卓客户端：https://github.com/shadowsocksrr/shadowsocksr-android/releases v2ray 参考连接：https://thetowerinfo.com/zh/v2ray-tutorial/ 更新系统并安装curl apt-get update -y &amp;&amp; apt-get install curl -y v2ray一键安装脚本 bash &lt;(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) 配置v2ray 获取uuid cat /proc/sys/kernel/random/uuid 创建编辑v2ray配置文件 vi /usr/local/etc/v2ray/config.json 删除config.json内容，粘贴上以下内容 { &#34;inbounds&#34;: [ { &#34;port&#34;: 16832, // 服务器端口，建议设置为443，支持多设备连接 &#34;protocol&#34;: &#34;vmess&#34;, &#34;settings&#34;: { &#34;clients&#34;: [ { &#34;id&#34;: &#34;b831381d-6324-4d53-ad4f-8cda68b30851&#34;, // 用户 ID， &#34;alterId&#34;: 0 } ] } } ], &#34;outbounds&#34;: [ { &#34;protocol&#34;: &#34;freedom&#34;, &#34;settings&#34;: {} } ] } 启动v2ray systemctl start v2ray 如果修改了配置文件， 需要重启生效 systemctl restart v2ray 安装Google BBR拥堵控制算法来为V2Ray服务器加速（选做） wget --no-check-certificate https://github." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://github.com/banbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA-%E5%89%AF%E6%9C%AC-2/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:59:58+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:59:58+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vpn快速搭建-副本-2"/>
+<meta name="twitter:description" content="vpn快速搭建 注意事项 购买国外云服务器（香港和澳门的服务器也不推荐） 推荐使用腾讯云或阿里云的抢占式云服务器，价格便宜，注意实例释放时间！！！！ ssr 参考链接：https://thetowerinfo.com/zh/setup-shadowsocks-server-china/ 获取ssr安装脚本 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh 赋予执行权限 chmod &#43;x shadowsocks-all.sh 运行脚本 ./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log 脚本选项 1.选择ShadowsocksR 2.为SSR设置密码 3.设置SSR端口，推荐443，可以多设备连接 4.加密方式，选择chacha20-ietf 5.传输协议，选择auth_sha1_v4_compatible 6.混淆模式，选择http_simple_compatible 7.任意键盘继续 8.保存相关参数，以便客户端连接使用 mac客户端：https://github.com/shadowsocksrr/electron-ssr/releases windows客户端：https://github.com/shadowsocksrr/shadowsocksr-csharp/releases ios客户端：Potatso Lite或Shadowrocket，国内用户需要注册一个海外账号，因为中国版的App Store里已经下架了所有VPN应用 安卓客户端：https://github.com/shadowsocksrr/shadowsocksr-android/releases v2ray 参考连接：https://thetowerinfo.com/zh/v2ray-tutorial/ 更新系统并安装curl apt-get update -y &amp;&amp; apt-get install curl -y v2ray一键安装脚本 bash &lt;(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) 配置v2ray 获取uuid cat /proc/sys/kernel/random/uuid 创建编辑v2ray配置文件 vi /usr/local/etc/v2ray/config.json 删除config.json内容，粘贴上以下内容 { &#34;inbounds&#34;: [ { &#34;port&#34;: 16832, // 服务器端口，建议设置为443，支持多设备连接 &#34;protocol&#34;: &#34;vmess&#34;, &#34;settings&#34;: { &#34;clients&#34;: [ { &#34;id&#34;: &#34;b831381d-6324-4d53-ad4f-8cda68b30851&#34;, // 用户 ID， &#34;alterId&#34;: 0 } ] } } ], &#34;outbounds&#34;: [ { &#34;protocol&#34;: &#34;freedom&#34;, &#34;settings&#34;: {} } ] } 启动v2ray systemctl start v2ray 如果修改了配置文件， 需要重启生效 systemctl restart v2ray 安装Google BBR拥堵控制算法来为V2Ray服务器加速（选做） wget --no-check-certificate https://github."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://github.com/banbu1118.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Vpn快速搭建-副本-2",
+      "item": "https://github.com/banbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA-%E5%89%AF%E6%9C%AC-2/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Vpn快速搭建-副本-2",
+  "name": "Vpn快速搭建-副本-2",
+  "description": "vpn快速搭建 注意事项 购买国外云服务器（香港和澳门的服务器也不推荐） 推荐使用腾讯云或阿里云的抢占式云服务器，价格便宜，注意实例释放时间！！！！ ssr 参考链接：https://thetowerinfo.com/zh/setup-shadowsocks-server-china/ 获取ssr安装脚本 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh 赋予执行权限 chmod +x shadowsocks-all.sh 运行脚本 ./shadowsocks-all.sh 2\u0026gt;\u0026amp;1 | tee shadowsocks-all.log 脚本选项 1.选择ShadowsocksR 2.为SSR设置密码 3.设置SSR端口，推荐443，可以多设备连接 4.加密方式，选择chacha20-ietf 5.传输协议，选择auth_sha1_v4_compatible 6.混淆模式，选择http_simple_compatible 7.任意键盘继续 8.保存相关参数，以便客户端连接使用 mac客户端：https://github.com/shadowsocksrr/electron-ssr/releases windows客户端：https://github.com/shadowsocksrr/shadowsocksr-csharp/releases ios客户端：Potatso Lite或Shadowrocket，国内用户需要注册一个海外账号，因为中国版的App Store里已经下架了所有VPN应用 安卓客户端：https://github.com/shadowsocksrr/shadowsocksr-android/releases v2ray 参考连接：https://thetowerinfo.com/zh/v2ray-tutorial/ 更新系统并安装curl apt-get update -y \u0026amp;\u0026amp; apt-get install curl -y v2ray一键安装脚本 bash \u0026lt;(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) 配置v2ray 获取uuid cat /proc/sys/kernel/random/uuid 创建编辑v2ray配置文件 vi /usr/local/etc/v2ray/config.json 删除config.json内容，粘贴上以下内容 { \u0026#34;inbounds\u0026#34;: [ { \u0026#34;port\u0026#34;: 16832, // 服务器端口，建议设置为443，支持多设备连接 \u0026#34;protocol\u0026#34;: \u0026#34;vmess\u0026#34;, \u0026#34;settings\u0026#34;: { \u0026#34;clients\u0026#34;: [ { \u0026#34;id\u0026#34;: \u0026#34;b831381d-6324-4d53-ad4f-8cda68b30851\u0026#34;, // 用户 ID， \u0026#34;alterId\u0026#34;: 0 } ] } } ], \u0026#34;outbounds\u0026#34;: [ { \u0026#34;protocol\u0026#34;: \u0026#34;freedom\u0026#34;, \u0026#34;settings\u0026#34;: {} } ] } 启动v2ray systemctl start v2ray 如果修改了配置文件， 需要重启生效 systemctl restart v2ray 安装Google BBR拥堵控制算法来为V2Ray服务器加速（选做） wget --no-check-certificate https://github.",
+  "keywords": [
+    
+  ],
+  "articleBody": "vpn快速搭建 注意事项 购买国外云服务器（香港和澳门的服务器也不推荐） 推荐使用腾讯云或阿里云的抢占式云服务器，价格便宜，注意实例释放时间！！！！ ssr 参考链接：https://thetowerinfo.com/zh/setup-shadowsocks-server-china/ 获取ssr安装脚本 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh 赋予执行权限 chmod +x shadowsocks-all.sh 运行脚本 ./shadowsocks-all.sh 2\u003e\u00261 | tee shadowsocks-all.log 脚本选项 1.选择ShadowsocksR 2.为SSR设置密码 3.设置SSR端口，推荐443，可以多设备连接 4.加密方式，选择chacha20-ietf 5.传输协议，选择auth_sha1_v4_compatible 6.混淆模式，选择http_simple_compatible 7.任意键盘继续 8.保存相关参数，以便客户端连接使用 mac客户端：https://github.com/shadowsocksrr/electron-ssr/releases windows客户端：https://github.com/shadowsocksrr/shadowsocksr-csharp/releases ios客户端：Potatso Lite或Shadowrocket，国内用户需要注册一个海外账号，因为中国版的App Store里已经下架了所有VPN应用 安卓客户端：https://github.com/shadowsocksrr/shadowsocksr-android/releases v2ray 参考连接：https://thetowerinfo.com/zh/v2ray-tutorial/ 更新系统并安装curl apt-get update -y \u0026\u0026 apt-get install curl -y v2ray一键安装脚本 bash \u003c(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) 配置v2ray 获取uuid cat /proc/sys/kernel/random/uuid 创建编辑v2ray配置文件 vi /usr/local/etc/v2ray/config.json 删除config.json内容，粘贴上以下内容 { \"inbounds\": [ { \"port\": 16832, // 服务器端口，建议设置为443，支持多设备连接 \"protocol\": \"vmess\", \"settings\": { \"clients\": [ { \"id\": \"b831381d-6324-4d53-ad4f-8cda68b30851\", // 用户 ID， \"alterId\": 0 } ] } } ], \"outbounds\": [ { \"protocol\": \"freedom\", \"settings\": {} } ] } 启动v2ray systemctl start v2ray 如果修改了配置文件， 需要重启生效 systemctl restart v2ray 安装Google BBR拥堵控制算法来为V2Ray服务器加速（选做） wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh \u0026\u0026 chmod +x bbr.sh \u0026\u0026 ./bbr.sh 如果修改了配置文件， 需要重启生效 systemctl restart v2ray windows客户端：https://github.com/2dust/v2rayN/releases\t#下载v2rayN-With-Core版本 mac客户端：https://github.com/Cenmrev/V2RayX/releases/ windows客户端配置方法： 打开客户端点击右上方的加号，在出现的下拉列表中选择“手动输入[Vmess]”，然后找到相应区域输入别名（remark，任意名称均可）、服务器IP地址（address）和之前记下的显示在V2Ray配置文件中的几项参数（Port，ID，alterID），还有一项是Security，是选择加密方式，可以自己在下拉列表中选择，和配置文件中的设置无关，建议选择“Chacha20-poly1305”。输入完成后点击右上方的勾号确定，再点击右下方的连接按钮就可以连接到服务器了。 使用Windows的V2RayN时只要添加服务器（选择Vmess服务器），输入各项信息确定后就会自动连接。注意还要设置系统代理，方法是在Windows的任务栏找到V2RayN的小图标，鼠标右击，在出现的菜单中找到“系统代理”，然后选择“自动配置系统代理”。 V2Ray有两种代理模式，有全局模式，和PAC模式，如果平时多用中国以外的网站，那么可以选用全局模式，如果平时会经常用到中国网站，如优酷，QQ音乐等，这些网站的服务只针对中国内的用户开放，这时应该采用PAC模式，让这些没被限制的网站不受V2Ray影响。 v2ray一键安装脚本 系统支持：Ubuntu，Debian，CentOS，推荐使用 Ubuntu 22，谨慎使用 CentOS，脚本可能无法正常运行！ 参考资料：https://233boy.com/v2ray/v2ray-script/ 更新系统 apt update 执行一键安装脚本 bash \u003c(wget -qO- -o- https://git.io/v2ray.sh) 启用bbr加速 v2ray(shell)-\u003e 9(关于)-\u003e1(启用) ",
+  "wordCount" : "148",
+  "inLanguage": "en",
+  "datePublished": "2023-12-08T01:59:58+08:00",
+  "dateModified": "2023-12-08T01:59:58+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://github.com/banbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA-%E5%89%AF%E6%9C%AC-2/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "banbu1118",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://github.com/banbu1118.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://github.com/banbu1118.github.io" accesskey="h" title="banbu1118 (Alt + H)">banbu1118</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Vpn快速搭建-副本-2
+    </h1>
+    <div class="post-meta"><span title='2023-12-08 01:59:58 +0800 CST'>December 8, 2023</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="vpn快速搭建">vpn快速搭建<a hidden class="anchor" aria-hidden="true" href="#vpn快速搭建">#</a></h1>
+<ul>
+<li>注意事项</li>
+</ul>
+<pre tabindex="0"><code>购买国外云服务器（香港和澳门的服务器也不推荐）
+推荐使用腾讯云或阿里云的抢占式云服务器，价格便宜，注意实例释放时间！！！！
+</code></pre><ul>
+<li>ssr</li>
+</ul>
+<pre tabindex="0"><code>参考链接：https://thetowerinfo.com/zh/setup-shadowsocks-server-china/
+
+获取ssr安装脚本
+wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
+
+赋予执行权限
+chmod +x shadowsocks-all.sh
+
+运行脚本
+./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log
+
+脚本选项
+1.选择ShadowsocksR
+2.为SSR设置密码
+3.设置SSR端口，推荐443，可以多设备连接
+4.加密方式，选择chacha20-ietf
+5.传输协议，选择auth_sha1_v4_compatible
+6.混淆模式，选择http_simple_compatible
+7.任意键盘继续
+8.保存相关参数，以便客户端连接使用
+
+mac客户端：https://github.com/shadowsocksrr/electron-ssr/releases
+windows客户端：https://github.com/shadowsocksrr/shadowsocksr-csharp/releases
+ios客户端：Potatso Lite或Shadowrocket，国内用户需要注册一个海外账号，因为中国版的App Store里已经下架了所有VPN应用
+安卓客户端：https://github.com/shadowsocksrr/shadowsocksr-android/releases
+</code></pre><ul>
+<li>v2ray</li>
+</ul>
+<pre tabindex="0"><code>参考连接：https://thetowerinfo.com/zh/v2ray-tutorial/
+
+更新系统并安装curl
+apt-get update -y &amp;&amp; apt-get install curl -y
+
+v2ray一键安装脚本
+bash &lt;(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
+
+配置v2ray
+获取uuid
+cat /proc/sys/kernel/random/uuid
+
+创建编辑v2ray配置文件
+vi /usr/local/etc/v2ray/config.json
+
+删除config.json内容，粘贴上以下内容
+{
+  &#34;inbounds&#34;: [
+    {
+      &#34;port&#34;: 16832, // 服务器端口，建议设置为443，支持多设备连接
+      &#34;protocol&#34;: &#34;vmess&#34;,   
+      &#34;settings&#34;: {
+        &#34;clients&#34;: [
+          {
+            &#34;id&#34;: &#34;b831381d-6324-4d53-ad4f-8cda68b30851&#34;,  // 用户 ID，
+            &#34;alterId&#34;: 0
+          }
+        ]
+      }
+    }
+  ],
+  &#34;outbounds&#34;: [
+    {
+      &#34;protocol&#34;: &#34;freedom&#34;,  
+      &#34;settings&#34;: {}
+    }
+  ]
+}
+
+启动v2ray
+systemctl start v2ray
+
+如果修改了配置文件， 需要重启生效
+systemctl restart v2ray
+
+安装Google BBR拥堵控制算法来为V2Ray服务器加速（选做）
+wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; ./bbr.sh
+
+如果修改了配置文件， 需要重启生效
+systemctl restart v2ray
+
+windows客户端：https://github.com/2dust/v2rayN/releases	#下载v2rayN-With-Core版本
+mac客户端：https://github.com/Cenmrev/V2RayX/releases/
+
+windows客户端配置方法：
+打开客户端点击右上方的加号，在出现的下拉列表中选择“手动输入[Vmess]”，然后找到相应区域输入别名（remark，任意名称均可）、服务器IP地址（address）和之前记下的显示在V2Ray配置文件中的几项参数（Port，ID，alterID），还有一项是Security，是选择加密方式，可以自己在下拉列表中选择，和配置文件中的设置无关，建议选择“Chacha20-poly1305”。输入完成后点击右上方的勾号确定，再点击右下方的连接按钮就可以连接到服务器了。
+
+使用Windows的V2RayN时只要添加服务器（选择Vmess服务器），输入各项信息确定后就会自动连接。注意还要设置系统代理，方法是在Windows的任务栏找到V2RayN的小图标，鼠标右击，在出现的菜单中找到“系统代理”，然后选择“自动配置系统代理”。
+
+V2Ray有两种代理模式，有全局模式，和PAC模式，如果平时多用中国以外的网站，那么可以选用全局模式，如果平时会经常用到中国网站，如优酷，QQ音乐等，这些网站的服务只针对中国内的用户开放，这时应该采用PAC模式，让这些没被限制的网站不受V2Ray影响。
+</code></pre><ul>
+<li>v2ray一键安装脚本</li>
+</ul>
+<pre tabindex="0"><code>系统支持：Ubuntu，Debian，CentOS，推荐使用 Ubuntu 22，谨慎使用 CentOS，脚本可能无法正常运行！
+
+参考资料：https://233boy.com/v2ray/v2ray-script/
+
+更新系统
+apt update
+
+执行一键安装脚本
+bash &lt;(wget -qO- -o- https://git.io/v2ray.sh)
+
+启用bbr加速
+v2ray(shell)-&gt; 9(关于)-&gt;1(启用)
+</code></pre>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://github.com/banbu1118.github.io">banbu1118</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
