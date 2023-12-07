@@ -9,15 +9,15 @@
 <meta name="keywords" content="">
 <meta name="description" content="vpn快速搭建 注意事项 购买国外云服务器（香港和澳门的服务器也不推荐） 推荐使用腾讯云或阿里云的抢占式云服务器，价格便宜，注意实例释放时间！！！！ ssr 参考链接：https://thetowerinfo.com/zh/setup-shadowsocks-server-china/ 获取ssr安装脚本 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh 赋予执行权限 chmod &#43;x shadowsocks-all.sh 运行脚本 ./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log 脚本选项 1.选择ShadowsocksR 2.为SSR设置密码 3.设置SSR端口，推荐443，可以多设备连接 4.加密方式，选择chacha20-ietf 5.传输协议，选择auth_sha1_v4_compatible 6.混淆模式，选择http_simple_compatible 7.任意键盘继续 8.保存相关参数，以便客户端连接使用 mac客户端：https://github.com/shadowsocksrr/electron-ssr/releases windows客户端：https://github.com/shadowsocksrr/shadowsocksr-csharp/releases ios客户端：Potatso Lite或Shadowrocket，国内用户需要注册一个海外账号，因为中国版的App Store里已经下架了所有VPN应用 安卓客户端：https://github.com/shadowsocksrr/shadowsocksr-android/releases v2ray 参考连接：https://thetowerinfo.com/zh/v2ray-tutorial/ 更新系统并安装curl apt-get update -y &amp;&amp; apt-get install curl -y v2ray一键安装脚本 bash &lt;(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) 配置v2ray 获取uuid cat /proc/sys/kernel/random/uuid 创建编辑v2ray配置文件 vi /usr/local/etc/v2ray/config.json 删除config.json内容，粘贴上以下内容 { &#34;inbounds&#34;: [ { &#34;port&#34;: 16832, // 服务器端口，建议设置为443，支持多设备连接 &#34;protocol&#34;: &#34;vmess&#34;, &#34;settings&#34;: { &#34;clients&#34;: [ { &#34;id&#34;: &#34;b831381d-6324-4d53-ad4f-8cda68b30851&#34;, // 用户 ID， &#34;alterId&#34;: 0 } ] } } ], &#34;outbounds&#34;: [ { &#34;protocol&#34;: &#34;freedom&#34;, &#34;settings&#34;: {} } ] } 启动v2ray systemctl start v2ray 如果修改了配置文件， 需要重启生效 systemctl restart v2ray 安装Google BBR拥堵控制算法来为V2Ray服务器加速（选做） wget --no-check-certificate https://github.">
 <meta name="author" content="">
-<link rel="canonical" href="https://github.com/banbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">
-<link crossorigin="anonymous" href="/banbu1118.github.io/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css" integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U&#43;6hYRq/Ez/nm5vg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/banbu1118.github.io/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+<link rel="canonical" href="http://banbbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css" integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U&#43;6hYRq/Ez/nm5vg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://github.com/banbu1118.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://github.com/banbu1118.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://github.com/banbu1118.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://github.com/banbu1118.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://github.com/banbu1118.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://banbbu1118.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://banbbu1118.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://banbbu1118.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://banbbu1118.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="http://banbbu1118.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <noscript>
@@ -59,7 +59,7 @@
 </noscript><meta property="og:title" content="Vpn快速搭建" />
 <meta property="og:description" content="vpn快速搭建 注意事项 购买国外云服务器（香港和澳门的服务器也不推荐） 推荐使用腾讯云或阿里云的抢占式云服务器，价格便宜，注意实例释放时间！！！！ ssr 参考链接：https://thetowerinfo.com/zh/setup-shadowsocks-server-china/ 获取ssr安装脚本 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh 赋予执行权限 chmod &#43;x shadowsocks-all.sh 运行脚本 ./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log 脚本选项 1.选择ShadowsocksR 2.为SSR设置密码 3.设置SSR端口，推荐443，可以多设备连接 4.加密方式，选择chacha20-ietf 5.传输协议，选择auth_sha1_v4_compatible 6.混淆模式，选择http_simple_compatible 7.任意键盘继续 8.保存相关参数，以便客户端连接使用 mac客户端：https://github.com/shadowsocksrr/electron-ssr/releases windows客户端：https://github.com/shadowsocksrr/shadowsocksr-csharp/releases ios客户端：Potatso Lite或Shadowrocket，国内用户需要注册一个海外账号，因为中国版的App Store里已经下架了所有VPN应用 安卓客户端：https://github.com/shadowsocksrr/shadowsocksr-android/releases v2ray 参考连接：https://thetowerinfo.com/zh/v2ray-tutorial/ 更新系统并安装curl apt-get update -y &amp;&amp; apt-get install curl -y v2ray一键安装脚本 bash &lt;(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) 配置v2ray 获取uuid cat /proc/sys/kernel/random/uuid 创建编辑v2ray配置文件 vi /usr/local/etc/v2ray/config.json 删除config.json内容，粘贴上以下内容 { &#34;inbounds&#34;: [ { &#34;port&#34;: 16832, // 服务器端口，建议设置为443，支持多设备连接 &#34;protocol&#34;: &#34;vmess&#34;, &#34;settings&#34;: { &#34;clients&#34;: [ { &#34;id&#34;: &#34;b831381d-6324-4d53-ad4f-8cda68b30851&#34;, // 用户 ID， &#34;alterId&#34;: 0 } ] } } ], &#34;outbounds&#34;: [ { &#34;protocol&#34;: &#34;freedom&#34;, &#34;settings&#34;: {} } ] } 启动v2ray systemctl start v2ray 如果修改了配置文件， 需要重启生效 systemctl restart v2ray 安装Google BBR拥堵控制算法来为V2Ray服务器加速（选做） wget --no-check-certificate https://github." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://github.com/banbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://banbbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-08T01:57:48+08:00" />
 <meta property="article:modified_time" content="2023-12-08T01:57:48+08:00" />
 
@@ -72,18 +72,18 @@
 {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  "itemListElement": [, 
+  "itemListElement": [
     {
       "@type": "ListItem",
-      "position":  2 ,
+      "position":  1 ,
       "name": "Posts",
-      "item": "https://github.com/banbu1118.github.io/posts/"
+      "item": "http://banbbu1118.github.io/posts/"
     }, 
     {
       "@type": "ListItem",
-      "position":  3 ,
+      "position":  2 ,
       "name": "Vpn快速搭建",
-      "item": "https://github.com/banbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/"
+      "item": "http://banbbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/"
     }
   ]
 }
@@ -105,14 +105,14 @@
   "dateModified": "2023-12-08T01:57:48+08:00",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://github.com/banbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/"
+    "@id": "http://banbbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "banbu1118",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://github.com/banbu1118.github.io/favicon.ico"
+      "url": "http://banbbu1118.github.io/favicon.ico"
     }
   }
 }
@@ -134,7 +134,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://github.com/banbu1118.github.io" accesskey="h" title="banbu1118 (Alt + H)">banbu1118</a>
+            <a href="http://banbbu1118.github.io/" accesskey="h" title="banbu1118 (Alt + H)">banbu1118</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -298,7 +298,7 @@ v2ray(shell)-&gt; 9(关于)-&gt;1(启用)
     </main>
     
 <footer class="footer">
-    <span>&copy; 2023 <a href="https://github.com/banbu1118.github.io">banbu1118</a></span>
+    <span>&copy; 2023 <a href="http://banbbu1118.github.io/">banbu1118</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
