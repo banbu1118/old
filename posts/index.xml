@@ -1,86 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Posts on banbu1118</title>
-    <link>banbbu1118.github.io/posts/</link>
-    <description>Recent content in Posts on banbu1118</description>
+    <title>📚文章 on Banbu1118&#39;s Blog</title>
+    <link>https://banbu1118.github.io/posts/</link>
+    <description>Recent content in 📚文章 on Banbu1118&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 08 Dec 2023 01:59:58 +0800</lastBuildDate><atom:link href="banbbu1118.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Vpn快速搭建-副本-2</title>
-      <link>banbbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA-%E5%89%AF%E6%9C%AC-2/</link>
-      <pubDate>Fri, 08 Dec 2023 01:59:58 +0800</pubDate>
-      
-      <guid>banbbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA-%E5%89%AF%E6%9C%AC-2/</guid>
-      <description>vpn快速搭建 注意事项 购买国外云服务器（香港和澳门的服务器也不推荐） 推荐使用腾讯云或阿里云的抢占式云服务器，价格便宜，注意实例释放时间！！！！ ssr 参考链接：https://thetowerinfo.com/zh/setup-shadowsocks-server-china/ 获取ssr安装脚本 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh 赋予执行权限 chmod +x shadowsocks-all.sh 运行脚本 ./shadowsocks-all.sh 2&amp;gt;&amp;amp;1 | tee shadowsocks-all.log 脚本选项 1.选择ShadowsocksR 2.为SSR设置密码 3.设置SSR端口，推荐443，可以多设备连接 4.加密方式，选择chacha20-ietf 5.传输协议，选择auth_sha1_v4_compatible 6.混淆模式，选择http_simple_compatible 7.任意键盘继续 8.保存相关参数，以便客户端连接使用 mac客户端：https://github.com/shadowsocksrr/electron-ssr/releases windows客户端：https://github.com/shadowsocksrr/shadowsocksr-csharp/releases ios客户端：Potatso Lite或Shadowrocket，国内用户需要注册一个海外账号，因为中国版的App Store里已经下架了所有VPN应用 安卓客户端：https://github.com/shadowsocksrr/shadowsocksr-android/releases v2ray 参考连接：https://thetowerinfo.com/zh/v2ray-tutorial/ 更新系统并安装curl apt-get update -y &amp;amp;&amp;amp; apt-get install curl -y v2ray一键安装脚本 bash &amp;lt;(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) 配置v2ray 获取uuid cat /proc/sys/kernel/random/uuid 创建编辑v2ray配置文件 vi /usr/local/etc/v2ray/config.json 删除config.json内容，粘贴上以下内容 { &amp;#34;inbounds&amp;#34;: [ { &amp;#34;port&amp;#34;: 16832, // 服务器端口，建议设置为443，支持多设备连接 &amp;#34;protocol&amp;#34;: &amp;#34;vmess&amp;#34;, &amp;#34;settings&amp;#34;: { &amp;#34;clients&amp;#34;: [ { &amp;#34;id&amp;#34;: &amp;#34;b831381d-6324-4d53-ad4f-8cda68b30851&amp;#34;, // 用户 ID， &amp;#34;alterId&amp;#34;: 0 } ] } } ], &amp;#34;outbounds&amp;#34;: [ { &amp;#34;protocol&amp;#34;: &amp;#34;freedom&amp;#34;, &amp;#34;settings&amp;#34;: {} } ] } 启动v2ray systemctl start v2ray 如果修改了配置文件， 需要重启生效 systemctl restart v2ray 安装Google BBR拥堵控制算法来为V2Ray服务器加速（选做） wget --no-check-certificate https://github.</description>
-    </item>
-    
-    <item>
-      <title>Vpn快速搭建-副本</title>
-      <link>banbbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA-%E5%89%AF%E6%9C%AC/</link>
-      <pubDate>Fri, 08 Dec 2023 01:59:48 +0800</pubDate>
-      
-      <guid>banbbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA-%E5%89%AF%E6%9C%AC/</guid>
-      <description>vpn快速搭建 注意事项 购买国外云服务器（香港和澳门的服务器也不推荐） 推荐使用腾讯云或阿里云的抢占式云服务器，价格便宜，注意实例释放时间！！！！ ssr 参考链接：https://thetowerinfo.com/zh/setup-shadowsocks-server-china/ 获取ssr安装脚本 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh 赋予执行权限 chmod +x shadowsocks-all.sh 运行脚本 ./shadowsocks-all.sh 2&amp;gt;&amp;amp;1 | tee shadowsocks-all.log 脚本选项 1.选择ShadowsocksR 2.为SSR设置密码 3.设置SSR端口，推荐443，可以多设备连接 4.加密方式，选择chacha20-ietf 5.传输协议，选择auth_sha1_v4_compatible 6.混淆模式，选择http_simple_compatible 7.任意键盘继续 8.保存相关参数，以便客户端连接使用 mac客户端：https://github.com/shadowsocksrr/electron-ssr/releases windows客户端：https://github.com/shadowsocksrr/shadowsocksr-csharp/releases ios客户端：Potatso Lite或Shadowrocket，国内用户需要注册一个海外账号，因为中国版的App Store里已经下架了所有VPN应用 安卓客户端：https://github.com/shadowsocksrr/shadowsocksr-android/releases v2ray 参考连接：https://thetowerinfo.com/zh/v2ray-tutorial/ 更新系统并安装curl apt-get update -y &amp;amp;&amp;amp; apt-get install curl -y v2ray一键安装脚本 bash &amp;lt;(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) 配置v2ray 获取uuid cat /proc/sys/kernel/random/uuid 创建编辑v2ray配置文件 vi /usr/local/etc/v2ray/config.json 删除config.json内容，粘贴上以下内容 { &amp;#34;inbounds&amp;#34;: [ { &amp;#34;port&amp;#34;: 16832, // 服务器端口，建议设置为443，支持多设备连接 &amp;#34;protocol&amp;#34;: &amp;#34;vmess&amp;#34;, &amp;#34;settings&amp;#34;: { &amp;#34;clients&amp;#34;: [ { &amp;#34;id&amp;#34;: &amp;#34;b831381d-6324-4d53-ad4f-8cda68b30851&amp;#34;, // 用户 ID， &amp;#34;alterId&amp;#34;: 0 } ] } } ], &amp;#34;outbounds&amp;#34;: [ { &amp;#34;protocol&amp;#34;: &amp;#34;freedom&amp;#34;, &amp;#34;settings&amp;#34;: {} } ] } 启动v2ray systemctl start v2ray 如果修改了配置文件， 需要重启生效 systemctl restart v2ray 安装Google BBR拥堵控制算法来为V2Ray服务器加速（选做） wget --no-check-certificate https://github.</description>
-    </item>
-    
-    <item>
-      <title>Docker学习笔记-副本-3</title>
-      <link>banbbu1118.github.io/posts/dock%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%89%AF%E6%9C%AC-2/</link>
-      <pubDate>Fri, 08 Dec 2023 01:58:49 +0800</pubDate>
-      
-      <guid>banbbu1118.github.io/posts/dock%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%89%AF%E6%9C%AC-2/</guid>
-      <description>[toc]
-Docker学习笔记 前言 一、Docker为什么会出现 解决运维开发过程中部署环境的冲突 二、Docker历史 2013年发布 三、Docker的思想 集装箱 标准化 隔离性 四、Docker的优势 快速部署，节约资源 五、Docker基本组成 客户端、服务器、仓库
-镜像（imag）：镜像文件
-容器（container）：运行一个或多个应用，通过镜像来创造
-仓库（repository）：公有仓库，私有仓库，阿里云（中科大）配置容器加速
-六、安装使用 1、帮助文档 docker官方文档[https://docs.docker.com/] 2、系统版本 CentOS Linux release 7.9.2009 (Core) 3、安装Docker 卸载旧版本 sudo yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine 安装需要的依赖包 sudo yum install -y yum-utils 配置管理docker源 sudo yum-config-manager \ --add-repo \ https://download.docker.com/linux/centos/docker-ce.repo 使用镜像仓库安装镜像
-创建文件，并输入镜像站点
-sudo vim /etc/docker/daemon.json { &amp;#34;registry-mirrors&amp;#34;:[&amp;#34;https://docker.mirrors.ustc.edu.cn&amp;#34;] } 安装docker引擎 sudo yum install docker-ce docker-ce-cli containerd.</description>
-    </item>
-    
-    <item>
-      <title>Docker学习笔记</title>
-      <link>banbbu1118.github.io/posts/dock%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Fri, 08 Dec 2023 01:58:48 +0800</pubDate>
-      
-      <guid>banbbu1118.github.io/posts/dock%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
-      <description>[toc]
-Docker学习笔记 前言 一、Docker为什么会出现 解决运维开发过程中部署环境的冲突 二、Docker历史 2013年发布 三、Docker的思想 集装箱 标准化 隔离性 四、Docker的优势 快速部署，节约资源 五、Docker基本组成 客户端、服务器、仓库
-镜像（imag）：镜像文件
-容器（container）：运行一个或多个应用，通过镜像来创造
-仓库（repository）：公有仓库，私有仓库，阿里云（中科大）配置容器加速
-六、安装使用 1、帮助文档 docker官方文档[https://docs.docker.com/] 2、系统版本 CentOS Linux release 7.9.2009 (Core) 3、安装Docker 卸载旧版本 sudo yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine 安装需要的依赖包 sudo yum install -y yum-utils 配置管理docker源 sudo yum-config-manager \ --add-repo \ https://download.docker.com/linux/centos/docker-ce.repo 使用镜像仓库安装镜像
-创建文件，并输入镜像站点
-sudo vim /etc/docker/daemon.json { &amp;#34;registry-mirrors&amp;#34;:[&amp;#34;https://docker.mirrors.ustc.edu.cn&amp;#34;] } 安装docker引擎 sudo yum install docker-ce docker-ce-cli containerd.</description>
-    </item>
-    
-    <item>
-      <title>Docker学习笔记-副本</title>
-      <link>banbbu1118.github.io/posts/dock%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%89%AF%E6%9C%AC/</link>
-      <pubDate>Fri, 08 Dec 2023 01:58:46 +0800</pubDate>
-      
-      <guid>banbbu1118.github.io/posts/dock%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%89%AF%E6%9C%AC/</guid>
-      <description>[toc]
-Docker学习笔记 前言 一、Docker为什么会出现 解决运维开发过程中部署环境的冲突 二、Docker历史 2013年发布 三、Docker的思想 集装箱 标准化 隔离性 四、Docker的优势 快速部署，节约资源 五、Docker基本组成 客户端、服务器、仓库
-镜像（imag）：镜像文件
-容器（container）：运行一个或多个应用，通过镜像来创造
-仓库（repository）：公有仓库，私有仓库，阿里云（中科大）配置容器加速
-六、安装使用 1、帮助文档 docker官方文档[https://docs.docker.com/] 2、系统版本 CentOS Linux release 7.9.2009 (Core) 3、安装Docker 卸载旧版本 sudo yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine 安装需要的依赖包 sudo yum install -y yum-utils 配置管理docker源 sudo yum-config-manager \ --add-repo \ https://download.docker.com/linux/centos/docker-ce.repo 使用镜像仓库安装镜像
-创建文件，并输入镜像站点
-sudo vim /etc/docker/daemon.json { &amp;#34;registry-mirrors&amp;#34;:[&amp;#34;https://docker.mirrors.ustc.edu.cn&amp;#34;] } 安装docker引擎 sudo yum install docker-ce docker-ce-cli containerd.</description>
-    </item>
-    
-    <item>
-      <title>Vpn快速搭建</title>
-      <link>banbbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/</link>
-      <pubDate>Fri, 08 Dec 2023 01:57:48 +0800</pubDate>
-      
-      <guid>banbbu1118.github.io/posts/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/</guid>
-      <description>vpn快速搭建 注意事项 购买国外云服务器（香港和澳门的服务器也不推荐） 推荐使用腾讯云或阿里云的抢占式云服务器，价格便宜，注意实例释放时间！！！！ ssr 参考链接：https://thetowerinfo.com/zh/setup-shadowsocks-server-china/ 获取ssr安装脚本 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh 赋予执行权限 chmod +x shadowsocks-all.sh 运行脚本 ./shadowsocks-all.sh 2&amp;gt;&amp;amp;1 | tee shadowsocks-all.log 脚本选项 1.选择ShadowsocksR 2.为SSR设置密码 3.设置SSR端口，推荐443，可以多设备连接 4.加密方式，选择chacha20-ietf 5.传输协议，选择auth_sha1_v4_compatible 6.混淆模式，选择http_simple_compatible 7.任意键盘继续 8.保存相关参数，以便客户端连接使用 mac客户端：https://github.com/shadowsocksrr/electron-ssr/releases windows客户端：https://github.com/shadowsocksrr/shadowsocksr-csharp/releases ios客户端：Potatso Lite或Shadowrocket，国内用户需要注册一个海外账号，因为中国版的App Store里已经下架了所有VPN应用 安卓客户端：https://github.com/shadowsocksrr/shadowsocksr-android/releases v2ray 参考连接：https://thetowerinfo.com/zh/v2ray-tutorial/ 更新系统并安装curl apt-get update -y &amp;amp;&amp;amp; apt-get install curl -y v2ray一键安装脚本 bash &amp;lt;(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) 配置v2ray 获取uuid cat /proc/sys/kernel/random/uuid 创建编辑v2ray配置文件 vi /usr/local/etc/v2ray/config.json 删除config.json内容，粘贴上以下内容 { &amp;#34;inbounds&amp;#34;: [ { &amp;#34;port&amp;#34;: 16832, // 服务器端口，建议设置为443，支持多设备连接 &amp;#34;protocol&amp;#34;: &amp;#34;vmess&amp;#34;, &amp;#34;settings&amp;#34;: { &amp;#34;clients&amp;#34;: [ { &amp;#34;id&amp;#34;: &amp;#34;b831381d-6324-4d53-ad4f-8cda68b30851&amp;#34;, // 用户 ID， &amp;#34;alterId&amp;#34;: 0 } ] } } ], &amp;#34;outbounds&amp;#34;: [ { &amp;#34;protocol&amp;#34;: &amp;#34;freedom&amp;#34;, &amp;#34;settings&amp;#34;: {} } ] } 启动v2ray systemctl start v2ray 如果修改了配置文件， 需要重启生效 systemctl restart v2ray 安装Google BBR拥堵控制算法来为V2Ray服务器加速（选做） wget --no-check-certificate https://github.</description>
-    </item>
-    
+    <language>zh</language>
+    <lastBuildDate>Thu, 14 Dec 2023 22:10:50 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
