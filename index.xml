@@ -6,14 +6,23 @@
     <description>Recent content on Banbu1118&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 14 Dec 2023 22:10:50 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Dec 2023 21:00:22 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>添加和删除系统引导</title>
+      <link>https://banbu1118.github.io/posts/ops/%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC/</link>
+      <pubDate>Fri, 15 Dec 2023 21:00:22 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC/</guid>
+      <description>前言 当成功安装系统（windows或linux）后，设备开机找不到引导，无法在bios界面添加时。 可以采用以下方法在uefi shell里添加或删除引导 添加引导 # 查看是否有efi目录，有则继续 ls fs0: # 查看是否有引导目录 ls fs0:\efi # 以pve为例 ls fs0:\efi\proxmox # 添加引导 bcfg boot add 0 fs0:\efi\proxmox\grubx64.efi #添加完成后，进入bio</description>
+    </item>
+    
     <item>
       <title>Docker学习笔记</title>
       <link>https://banbu1118.github.io/posts/ops/dock%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Thu, 14 Dec 2023 22:10:50 +0800</pubDate>
       
       <guid>https://banbu1118.github.io/posts/ops/dock%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
-      <description>Docker学习笔记 前言 一、Docker为什么会出现 解决运维开发过程中部署环境的冲突 二、Docker历史 2013年发布 三、Docker的思想 集装箱 标准化 隔离性 四、Docker的优势 快速部署，节约资源 五、Docker基本组成 客户端、服务器、仓库 镜像（imag）：镜像文件 容器（con</description>
+      <description>前言 一、Docker为什么会出现 解决运维开发过程中部署环境的冲突 二、Docker历史 2013年发布 三、Docker的思想 集装箱 标准化 隔离性 四、Docker的优势 快速部署，节约资源 五、Docker基本组成 客户端、服务器、仓库 镜像（imag）：镜像文件 容器（container）：运行</description>
     </item>
     
     <item>
@@ -22,7 +31,7 @@
       <pubDate>Thu, 14 Dec 2023 22:00:50 +0800</pubDate>
       
       <guid>https://banbu1118.github.io/posts/ops/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/</guid>
-      <description>vpn快速搭建 注意事项 购买国外云服务器（香港和澳门的服务器也不推荐） 推荐使用腾讯云或阿里云的抢占式云服务器，价格便宜，注意实例释放时间！！！！ ssr 参考链接：https://thetowerinfo.com/zh/setup-shadowsocks-server-china/ 获取ss</description>
+      <description>注意事项 购买国外云服务器（香港和澳门的服务器也不推荐） 推荐使用腾讯云或阿里云的抢占式云服务器，价格便宜，注意实例释放时间！！！！ ssr 参考链接：https://thetowerinfo.com/zh/setup-shadowsocks-server-china/ 获取ssr安装脚本 wget --no-check-certificate</description>
     </item>
     
     <item>
