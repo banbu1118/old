@@ -6,7 +6,16 @@
     <description>Recent content in 🧱 运维 on Banbu1118&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Fri, 15 Dec 2023 21:00:22 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/posts/ops/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Dec 2023 19:56:20 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/posts/ops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>搭建dhcp服务器</title>
+      <link>https://banbu1118.github.io/posts/ops/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <pubDate>Sat, 16 Dec 2023 19:56:20 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description>搭建dhcp服务 centos7搭建dhcp服务 1.centos7配置静态ip #使用nmtui配置静态ip 安装dhcp yum install dhcp 复制实例文件到配置目录 cp /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example dhcpd.conf 编辑dhcp.conf文件，如下所示 subnet 192.168.8.0 netmask 255.255.255.0 { option domain-name-servers 192.168.8.1; range 192.168.8.100 192.168.8.101; option routers 192.168.8.1; default-lease-time 600; max-lease-time 7200; } # 参考文档：https://blog.csdn.net/</description>
+    </item>
+    
     <item>
       <title>添加和删除系统引导</title>
       <link>https://banbu1118.github.io/posts/ops/%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC/</link>
