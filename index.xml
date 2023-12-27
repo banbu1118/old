@@ -6,7 +6,16 @@
     <description>Recent content on Banbu1118&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 25 Dec 2023 19:20:02 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 Dec 2023 20:18:16 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pve7和8一键换源脚本</title>
+      <link>https://banbu1118.github.io/posts/ops/pve7%E5%92%8C8%E4%B8%80%E9%94%AE%E6%8D%A2%E6%BA%90%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Wed, 27 Dec 2023 20:18:16 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve7%E5%92%8C8%E4%B8%80%E9%94%AE%E6%8D%A2%E6%BA%90%E8%84%9A%E6%9C%AC/</guid>
+      <description>#!/bin/bash # 更换debian系统源 cp /etc/apt/sources.list /etc/apt/sources.list.bak # 备份ceph源 if [ -e /etc/apt/sources.list.d/ceph.list ]; then cp /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.list.bak fi # 备份pve源 if [ -e /etc/apt/sources.list.d/pve-no-subscription.list ]; then cp /etc/apt/sources.list.d/pve-no-subscription.list /etc/apt//sources.list.d/pve-no-subscription.list.bak fi # 备份pve企业源 cp /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak # 检测pve版本 pve_version=$(pveversion|awk -F &amp;#39;/&amp;#39; &amp;#39;{print $2}&amp;#39;|cut -c1) # 禁用ceph源 if [ -e /etc/apt/sources.list.d/ceph.list ]; then sed -i &amp;#39;1s/^/# /&amp;#39; /etc/apt/sources.list.d/ceph.list fi # 禁用pve企业源 sed -i &amp;#39;1s/^/# /&amp;#39; /etc/apt/sources.list.d/pve-enterprise.list # 更新pve为清华源 if [[ $pve_version == &amp;#34;7&amp;#34; ]]; then echo &amp;#34; # 默认注释了源码镜像</description>
+    </item>
+    
     <item>
       <title>Uos Kylin Lvm扩容</title>
       <link>https://banbu1118.github.io/posts/ops/uos-kylin-lvm%E6%89%A9%E5%AE%B9/</link>
