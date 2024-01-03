@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Pve7和8一键换源脚本 | Banbu1118&#39;s Blog</title>
+<title>Pve7升级pve8一键脚本 | Banbu1118&#39;s Blog</title>
 <meta name="keywords" content="">
-<meta name="description" content="#!/bin/bash # Backup original sources.list cp /etc/apt/sources.list /etc/apt/sources.list.bak # Backup ceph.list if [ -e /etc/apt/sources.list.d/ceph.list ]; then cp /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.list.bak fi # Backup pve-no-subscription.list if [ -e /etc/apt/sources.list.d/pve-no-subscription.list ]; then cp /etc/apt/sources.list.d/pve-no-subscription.list /etc/apt//sources.list.d/pve-no-subscription.list.bak fi # Backup pve-enterprise.list cp /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak # Determine Proxmox VE version pve_version=$(pveversion|awk -F &#39;/&#39; &#39;{print $2}&#39;|cut -c1) # prohibit ceph if [ -e /etc/apt/sources.list.d/ceph.list ]; then sed -i &#39;1s/^/# /&#39; /etc/apt/sources.list.d/ceph.list fi #prohibit pve-enterprise sed -i &#39;1s/^/# /&#39; /etc/apt/sources.list.d/pve-enterprise.list # Update sources.list with ustc mirror based on the detected Proxmox VE version if [[ $pve_version == &#34;7&#34; ]]; then echo &#34; deb https://mirrors.ustc.edu.cn/debian bullseye main contrib deb https://mirrors.ustc.edu.cn/debian bullseye-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib &#34; &gt; /etc/apt/sources.list echo &#34; deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription &#34; &gt; /etc/apt/sources.list.d/pve-no-subscription.list elif [[ $pve_version == &#34;8&#34; ]]; then echo &#34; deb https://mirrors.ustc.edu.cn/debian bookworm main contrib deb">
+<meta name="description" content="#/bin/bash #pve升级检查 pve7to8 pve7to8 --full #查看版本 #pveversion #更换为pve8的源 echo &#34; deb https://mirrors.ustc.edu.cn/debian bookworm main contrib deb https://mirrors.ustc.edu.cn/debian bookworm-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bookworm-security main contrib &#34; &gt; /etc/apt/sources.list echo &#34; deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bookworm pve-no-subscription &#34; &gt; /etc/apt/sources.list.d/pve-no-subscription.list #开始升级pve8 apt update -y apt dist-upgrade -y">
 <meta name="author" content="Banbu1118">
-<link rel="canonical" href="https://banbu1118.github.io/posts/ops/pve7%E5%92%8C8%E4%B8%80%E9%94%AE%E6%8D%A2%E6%BA%90%E8%84%9A%E6%9C%AC/">
+<link rel="canonical" href="https://banbu1118.github.io/posts/ops/pve7%E5%8D%87%E7%BA%A7pve8%E4%B8%80%E9%94%AE%E8%84%9A%E6%9C%AC/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://banbu1118.github.io/img/Q.jpg">
@@ -73,16 +73,16 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-<meta property="og:title" content="Pve7和8一键换源脚本" />
-<meta property="og:description" content="#!/bin/bash # Backup original sources.list cp /etc/apt/sources.list /etc/apt/sources.list.bak # Backup ceph.list if [ -e /etc/apt/sources.list.d/ceph.list ]; then cp /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.list.bak fi # Backup pve-no-subscription.list if [ -e /etc/apt/sources.list.d/pve-no-subscription.list ]; then cp /etc/apt/sources.list.d/pve-no-subscription.list /etc/apt//sources.list.d/pve-no-subscription.list.bak fi # Backup pve-enterprise.list cp /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak # Determine Proxmox VE version pve_version=$(pveversion|awk -F &#39;/&#39; &#39;{print $2}&#39;|cut -c1) # prohibit ceph if [ -e /etc/apt/sources.list.d/ceph.list ]; then sed -i &#39;1s/^/# /&#39; /etc/apt/sources.list.d/ceph.list fi #prohibit pve-enterprise sed -i &#39;1s/^/# /&#39; /etc/apt/sources.list.d/pve-enterprise.list # Update sources.list with ustc mirror based on the detected Proxmox VE version if [[ $pve_version == &#34;7&#34; ]]; then echo &#34; deb https://mirrors.ustc.edu.cn/debian bullseye main contrib deb https://mirrors.ustc.edu.cn/debian bullseye-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib &#34; &gt; /etc/apt/sources.list echo &#34; deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription &#34; &gt; /etc/apt/sources.list.d/pve-no-subscription.list elif [[ $pve_version == &#34;8&#34; ]]; then echo &#34; deb https://mirrors.ustc.edu.cn/debian bookworm main contrib deb" />
+<meta property="og:title" content="Pve7升级pve8一键脚本" />
+<meta property="og:description" content="#/bin/bash #pve升级检查 pve7to8 pve7to8 --full #查看版本 #pveversion #更换为pve8的源 echo &#34; deb https://mirrors.ustc.edu.cn/debian bookworm main contrib deb https://mirrors.ustc.edu.cn/debian bookworm-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bookworm-security main contrib &#34; &gt; /etc/apt/sources.list echo &#34; deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bookworm pve-no-subscription &#34; &gt; /etc/apt/sources.list.d/pve-no-subscription.list #开始升级pve8 apt update -y apt dist-upgrade -y" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://banbu1118.github.io/posts/ops/pve7%E5%92%8C8%E4%B8%80%E9%94%AE%E6%8D%A2%E6%BA%90%E8%84%9A%E6%9C%AC/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-12-27T20:18:16+08:00" />
-<meta property="article:modified_time" content="2023-12-27T20:18:16+08:00" />
+<meta property="og:url" content="https://banbu1118.github.io/posts/ops/pve7%E5%8D%87%E7%BA%A7pve8%E4%B8%80%E9%94%AE%E8%84%9A%E6%9C%AC/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-01-03T23:15:46+08:00" />
+<meta property="article:modified_time" content="2024-01-03T23:15:46+08:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Pve7和8一键换源脚本"/>
-<meta name="twitter:description" content="#!/bin/bash # Backup original sources.list cp /etc/apt/sources.list /etc/apt/sources.list.bak # Backup ceph.list if [ -e /etc/apt/sources.list.d/ceph.list ]; then cp /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.list.bak fi # Backup pve-no-subscription.list if [ -e /etc/apt/sources.list.d/pve-no-subscription.list ]; then cp /etc/apt/sources.list.d/pve-no-subscription.list /etc/apt//sources.list.d/pve-no-subscription.list.bak fi # Backup pve-enterprise.list cp /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak # Determine Proxmox VE version pve_version=$(pveversion|awk -F &#39;/&#39; &#39;{print $2}&#39;|cut -c1) # prohibit ceph if [ -e /etc/apt/sources.list.d/ceph.list ]; then sed -i &#39;1s/^/# /&#39; /etc/apt/sources.list.d/ceph.list fi #prohibit pve-enterprise sed -i &#39;1s/^/# /&#39; /etc/apt/sources.list.d/pve-enterprise.list # Update sources.list with ustc mirror based on the detected Proxmox VE version if [[ $pve_version == &#34;7&#34; ]]; then echo &#34; deb https://mirrors.ustc.edu.cn/debian bullseye main contrib deb https://mirrors.ustc.edu.cn/debian bullseye-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib &#34; &gt; /etc/apt/sources.list echo &#34; deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription &#34; &gt; /etc/apt/sources.list.d/pve-no-subscription.list elif [[ $pve_version == &#34;8&#34; ]]; then echo &#34; deb https://mirrors.ustc.edu.cn/debian bookworm main contrib deb"/>
+<meta name="twitter:title" content="Pve7升级pve8一键脚本"/>
+<meta name="twitter:description" content="#/bin/bash #pve升级检查 pve7to8 pve7to8 --full #查看版本 #pveversion #更换为pve8的源 echo &#34; deb https://mirrors.ustc.edu.cn/debian bookworm main contrib deb https://mirrors.ustc.edu.cn/debian bookworm-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bookworm-security main contrib &#34; &gt; /etc/apt/sources.list echo &#34; deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bookworm pve-no-subscription &#34; &gt; /etc/apt/sources.list.d/pve-no-subscription.list #开始升级pve8 apt update -y apt dist-upgrade -y"/>
 
 
 <script type="application/ld+json">
@@ -107,8 +107,8 @@ var _hmt = _hmt || [];
     {
       "@type": "ListItem",
       "position":  3 ,
-      "name": "Pve7和8一键换源脚本",
-      "item": "https://banbu1118.github.io/posts/ops/pve7%E5%92%8C8%E4%B8%80%E9%94%AE%E6%8D%A2%E6%BA%90%E8%84%9A%E6%9C%AC/"
+      "name": "Pve7升级pve8一键脚本",
+      "item": "https://banbu1118.github.io/posts/ops/pve7%E5%8D%87%E7%BA%A7pve8%E4%B8%80%E9%94%AE%E8%84%9A%E6%9C%AC/"
     }
   ]
 }
@@ -117,24 +117,24 @@ var _hmt = _hmt || [];
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Pve7和8一键换源脚本",
-  "name": "Pve7和8一键换源脚本",
-  "description": "#!/bin/bash # Backup original sources.list cp /etc/apt/sources.list /etc/apt/sources.list.bak # Backup ceph.list if [ -e /etc/apt/sources.list.d/ceph.list ]; then cp /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.list.bak fi # Backup pve-no-subscription.list if [ -e /etc/apt/sources.list.d/pve-no-subscription.list ]; then cp /etc/apt/sources.list.d/pve-no-subscription.list /etc/apt//sources.list.d/pve-no-subscription.list.bak fi # Backup pve-enterprise.list cp /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak # Determine Proxmox VE version pve_version=$(pveversion|awk -F \u0026#39;/\u0026#39; \u0026#39;{print $2}\u0026#39;|cut -c1) # prohibit ceph if [ -e /etc/apt/sources.list.d/ceph.list ]; then sed -i \u0026#39;1s/^/# /\u0026#39; /etc/apt/sources.list.d/ceph.list fi #prohibit pve-enterprise sed -i \u0026#39;1s/^/# /\u0026#39; /etc/apt/sources.list.d/pve-enterprise.list # Update sources.list with ustc mirror based on the detected Proxmox VE version if [[ $pve_version == \u0026#34;7\u0026#34; ]]; then echo \u0026#34; deb https://mirrors.ustc.edu.cn/debian bullseye main contrib deb https://mirrors.ustc.edu.cn/debian bullseye-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib \u0026#34; \u0026gt; /etc/apt/sources.list echo \u0026#34; deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription \u0026#34; \u0026gt; /etc/apt/sources.list.d/pve-no-subscription.list elif [[ $pve_version == \u0026#34;8\u0026#34; ]]; then echo \u0026#34; deb https://mirrors.ustc.edu.cn/debian bookworm main contrib deb",
+  "headline": "Pve7升级pve8一键脚本",
+  "name": "Pve7升级pve8一键脚本",
+  "description": "#/bin/bash #pve升级检查 pve7to8 pve7to8 --full #查看版本 #pveversion #更换为pve8的源 echo \u0026#34; deb https://mirrors.ustc.edu.cn/debian bookworm main contrib deb https://mirrors.ustc.edu.cn/debian bookworm-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bookworm-security main contrib \u0026#34; \u0026gt; /etc/apt/sources.list echo \u0026#34; deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bookworm pve-no-subscription \u0026#34; \u0026gt; /etc/apt/sources.list.d/pve-no-subscription.list #开始升级pve8 apt update -y apt dist-upgrade -y",
   "keywords": [
     ""
   ],
-  "articleBody": "#!/bin/bash # Backup original sources.list cp /etc/apt/sources.list /etc/apt/sources.list.bak # Backup ceph.list if [ -e /etc/apt/sources.list.d/ceph.list ]; then cp /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.list.bak fi # Backup pve-no-subscription.list if [ -e /etc/apt/sources.list.d/pve-no-subscription.list ]; then cp /etc/apt/sources.list.d/pve-no-subscription.list /etc/apt//sources.list.d/pve-no-subscription.list.bak fi # Backup pve-enterprise.list cp /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak # Determine Proxmox VE version pve_version=$(pveversion|awk -F '/' '{print $2}'|cut -c1) # prohibit ceph if [ -e /etc/apt/sources.list.d/ceph.list ]; then sed -i '1s/^/# /' /etc/apt/sources.list.d/ceph.list fi #prohibit pve-enterprise sed -i '1s/^/# /' /etc/apt/sources.list.d/pve-enterprise.list # Update sources.list with ustc mirror based on the detected Proxmox VE version if [[ $pve_version == \"7\" ]]; then echo \" deb https://mirrors.ustc.edu.cn/debian bullseye main contrib deb https://mirrors.ustc.edu.cn/debian bullseye-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib \" \u003e /etc/apt/sources.list echo \" deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription \" \u003e /etc/apt/sources.list.d/pve-no-subscription.list elif [[ $pve_version == \"8\" ]]; then echo \" deb https://mirrors.ustc.edu.cn/debian bookworm main contrib deb https://mirrors.ustc.edu.cn/debian bookworm-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bookworm-security main contrib \" \u003e /etc/apt/sources.list echo \" deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bookworm pve-no-subscription \" \u003e /etc/apt/sources.list.d/pve-no-subscription.list else echo \"Unsupported Proxmox VE version.\" exit 1 fi # Update package index apt update echo \"APT sources have been updated with ustc mirror for Proxmox VE $pve_version.\" ",
-  "wordCount" : "192",
+  "articleBody": "#/bin/bash #pve升级检查 pve7to8 pve7to8 --full #查看版本 #pveversion #更换为pve8的源 echo \" deb https://mirrors.ustc.edu.cn/debian bookworm main contrib deb https://mirrors.ustc.edu.cn/debian bookworm-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bookworm-security main contrib \" \u003e /etc/apt/sources.list echo \" deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bookworm pve-no-subscription \" \u003e /etc/apt/sources.list.d/pve-no-subscription.list #开始升级pve8 apt update -y apt dist-upgrade -y ",
+  "wordCount" : "75",
   "inLanguage": "zh",
-  "datePublished": "2023-12-27T20:18:16+08:00",
-  "dateModified": "2023-12-27T20:18:16+08:00",
+  "datePublished": "2024-01-03T23:15:46+08:00",
+  "dateModified": "2024-01-03T23:15:46+08:00",
   "author":[{
     "@type": "Person",
     "name": "Banbu1118"
   }],
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://banbu1118.github.io/posts/ops/pve7%E5%92%8C8%E4%B8%80%E9%94%AE%E6%8D%A2%E6%BA%90%E8%84%9A%E6%9C%AC/"
+    "@id": "https://banbu1118.github.io/posts/ops/pve7%E5%8D%87%E7%BA%A7pve8%E4%B8%80%E9%94%AE%E8%84%9A%E6%9C%AC/"
   },
   "publisher": {
     "@type": "Organization",
@@ -245,7 +245,7 @@ var _hmt = _hmt || [];
         <header class="post-header">
             <div class="breadcrumbs"><a href="https://banbu1118.github.io/">🏠 主页</a>&nbsp;»&nbsp;<a href="https://banbu1118.github.io/posts/">📚文章</a>&nbsp;»&nbsp;<a href="https://banbu1118.github.io/posts/ops/">🧱 运维</a></div>
             <h1 class="post-title">
-                Pve7和8一键换源脚本
+                Pve7升级pve8一键脚本
             </h1>
             <div class="post-meta">
 
@@ -266,7 +266,7 @@ var _hmt = _hmt || [];
 <span class="parent-post-meta">
     <span id="post_meta_style_1">
         <span class="fa fa-calendar-check-o"></span>
-        <span>2023-12-27
+        <span>2024-01-03
             &nbsp;&nbsp;
         </span>
     </span>
@@ -279,7 +279,7 @@ var _hmt = _hmt || [];
     
     <span id="post_meta_style_3">
         <span class="fa fa-file-word-o"></span>
-        <span>192字
+        <span>75字
             &nbsp;&nbsp;
         </span>
     </span>
@@ -352,50 +352,16 @@ var _hmt = _hmt || [];
 
 </div>
         </header> 
-        <div class="post-content"><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Backup original sources.list</span>
-</span></span><span style="display:flex;"><span>cp /etc/apt/sources.list /etc/apt/sources.list.bak
+        <div class="post-content"><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#/bin/bash</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Backup ceph.list</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -e /etc/apt/sources.list.d/ceph.list <span style="color:#f92672">]</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">then</span> cp /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.list.bak
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pve升级检查</span>
+</span></span><span style="display:flex;"><span>pve7to8
+</span></span><span style="display:flex;"><span>pve7to8 --full
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Backup pve-no-subscription.list</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -e /etc/apt/sources.list.d/pve-no-subscription.list <span style="color:#f92672">]</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">then</span> cp /etc/apt/sources.list.d/pve-no-subscription.list /etc/apt//sources.list.d/pve-no-subscription.list.bak
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#查看版本</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pveversion</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Backup pve-enterprise.list</span>
-</span></span><span style="display:flex;"><span>cp /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Determine Proxmox VE version</span>
-</span></span><span style="display:flex;"><span>pve_version<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>pveversion|awk -F <span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#e6db74">&#39;{print $2}&#39;</span>|cut -c1<span style="color:#66d9ef">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># prohibit ceph</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -e /etc/apt/sources.list.d/ceph.list <span style="color:#f92672">]</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">then</span> sed -i <span style="color:#e6db74">&#39;1s/^/# /&#39;</span> /etc/apt/sources.list.d/ceph.list
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#prohibit pve-enterprise</span>
-</span></span><span style="display:flex;"><span>sed -i <span style="color:#e6db74">&#39;1s/^/# /&#39;</span>  /etc/apt/sources.list.d/pve-enterprise.list
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Update sources.list with ustc mirror based on the detected Proxmox VE version</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $pve_version <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;7&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/debian bullseye main contrib
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/debian bullseye-updates main contrib
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># security updates
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span> &gt; /etc/apt/sources.list
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span> &gt;  /etc/apt/sources.list.d/pve-no-subscription.list
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> $pve_version <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;8&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#更换为pve8的源</span>
 </span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/debian bookworm main contrib
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/debian bookworm-updates main contrib
@@ -407,15 +373,9 @@ var _hmt = _hmt || [];
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bookworm pve-no-subscription
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span> &gt;  /etc/apt/sources.list.d/pve-no-subscription.list
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
-</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Unsupported Proxmox VE version.&#34;</span>
-</span></span><span style="display:flex;"><span>    exit <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Update package index</span>
-</span></span><span style="display:flex;"><span>apt update
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;APT sources have been updated with ustc mirror for Proxmox VE </span>$pve_version<span style="color:#e6db74">.&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#开始升级pve8</span>
+</span></span><span style="display:flex;"><span>apt update -y
+</span></span><span style="display:flex;"><span>apt dist-upgrade -y
 </span></span></code></pre></div>
 
         </div>
