@@ -424,40 +424,6 @@ var _hmt = _hmt || [];
             
         </footer>
     </div>
-
-<style>
-    .comments_details summary::marker {
-        font-size: 20px;
-        content: '👉展开评论';
-        color: var(--content);
-    }
-    .comments_details[open] summary::marker{
-        font-size: 20px;
-        content: '👇关闭评论';
-        color: var(--content);
-    }
-</style>
-
-
-<div>
-    <details class="comments_details">
-        <summary style="cursor: pointer; margin: 50px 0 20px 0;width: 130px;">
-            <span style="font-size: 20px;color: var(--content);">...</span>
-        </summary>
-        <div id="tcomment"></div>
-    </details>
-    <script src="https://cdn.staticfile.org/twikoo/1.5.8/twikoo.all.min.js">
-    </script>
-    <script>
-        twikoo.init({
-            envId:  null ,
-        el: "#tcomment",
-            lang: 'zh-CN',
-            region:  null ,
-        path: window.TWIKOO_MAGIC_PATH||window.location.pathname,
-        })
-    </script>
-</div>
 </article>
 </main>
 
@@ -572,10 +538,11 @@ var _hmt = _hmt || [];
 
         copybutton.addEventListener('click', (cb) => {
             if ('clipboard' in navigator) {
-                let text = codeblock.textContent +
-                    '\r\n————————————————\r\n' +
-                    '版权声明：本文为「'+"Banbu1118's Blog"+'」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。' +
-                '\r\n原文链接：' + location.href;
+                let text = codeblock.textContent;
+                
+                
+                
+                
                 navigator.clipboard.writeText(text);
                 copyingDone();
                 return;

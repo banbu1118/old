@@ -506,10 +506,11 @@ var _hmt = _hmt || [];
 
         copybutton.addEventListener('click', (cb) => {
             if ('clipboard' in navigator) {
-                let text = codeblock.textContent +
-                    '\r\n————————————————\r\n' +
-                    '版权声明：本文为「'+"Banbu1118's Blog"+'」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。' +
-                '\r\n原文链接：' + location.href;
+                let text = codeblock.textContent;
+                
+                
+                
+                
                 navigator.clipboard.writeText(text);
                 copyingDone();
                 return;
