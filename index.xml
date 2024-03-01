@@ -6,7 +6,43 @@
     <description>Recent content on Banbu1118&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 01 Feb 2024 00:20:25 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Mar 2024 00:23:20 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux虚拟机新增磁盘挂载</title>
+      <link>https://banbu1118.github.io/posts/ops/linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%B0%E5%A2%9E%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD/</link>
+      <pubDate>Sat, 02 Mar 2024 00:23:20 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%B0%E5%A2%9E%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD/</guid>
+      <description>查看磁盘是否挂载 #查看磁盘是否挂载 lsblk #注意：新添加的磁盘需要重启虚拟机才能显示添加成功 分区 #使用cfdisk或fdisk进行分区 fdisk /dev/sdb #开始对/sdb 分区 m 显示命令列表 p 显示磁盘分区 同 fdisk –l n 新增分区 d 删除分区 w 写入并退出  说明： 开始分区后输入 n，新增分区，然后选择 p ，分区类型为主</description>
+    </item>
+    
+    <item>
+      <title>Windows删除分区</title>
+      <link>https://banbu1118.github.io/posts/ops/windows%E5%88%A0%E9%99%A4%E5%88%86%E5%8C%BA/</link>
+      <pubDate>Sat, 02 Mar 2024 00:22:20 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/windows%E5%88%A0%E9%99%A4%E5%88%86%E5%8C%BA/</guid>
+      <description>磁盘扩容时需要删除恢复分区才能操作 #管理员权限执行cmd #启用diskpart工具 diskpart #查看磁盘 list disk #选择需要操作的磁盘 select disk 0 #查看分区 list partition #选择需要操作的分区 select partition 3 #删除分区 delete partition override #退出 exit</description>
+    </item>
+    
+    <item>
+      <title>Pve Ceph超融合搭建</title>
+      <link>https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Thu, 29 Feb 2024 21:50:59 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/</guid>
+      <description>环境介绍</description>
+    </item>
+    
+    <item>
+      <title>Pve改文件存储</title>
+      <link>https://banbu1118.github.io/posts/ops/pve%E6%94%B9%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/</link>
+      <pubDate>Thu, 29 Feb 2024 21:34:19 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve%E6%94%B9%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/</guid>
+      <description>local-lvm改目录存储，提升运行速度 #实测pve7和8都行 pvesh delete /storage/local-lvm umount /dev/pve/data lvremove /dev/pve/data -y vgdisplay pve | grep Free | awk &amp;#39;{print &amp;#34;lvcreate -l &amp;#34; $5 &amp;#34; -n data pve -y&amp;#34;}&amp;#39; |bash mkfs.ext4 /dev/pve/data mkdir /mnt/data mount /dev/pve/data /mnt/data echo &amp;#34;/dev/pve/data /mnt/data ext4 defaults 0 0&amp;#34; &amp;gt;&amp;gt; /etc/fstab pvesm add dir data --path=/mnt/data 详情参考链接 [Proxmox的local-lvm改文件存储，提升运行速度](https://www.cnblogs.com</description>
+    </item>
+    
     <item>
       <title>Imagemagick工具创建图片</title>
       <link>https://banbu1118.github.io/posts/dev/imagemagick%E5%B7%A5%E5%85%B7%E5%88%9B%E5%BB%BA%E5%9B%BE%E7%89%87/</link>
