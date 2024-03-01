@@ -3,10 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://banbu1118.github.io/posts/</loc>
-    <lastmod>2024-03-02T00:23:20+08:00</lastmod>
+    <lastmod>2024-03-02T00:48:19+08:00</lastmod>
   </url><url>
     <loc>https://banbu1118.github.io/</loc>
-    <lastmod>2024-03-02T00:23:20+08:00</lastmod>
+    <lastmod>2024-03-02T00:48:19+08:00</lastmod>
+  </url><url>
+    <loc>https://banbu1118.github.io/posts/life/</loc>
+    <lastmod>2024-03-02T00:48:19+08:00</lastmod>
+  </url><url>
+    <loc>https://banbu1118.github.io/posts/life/%E5%BA%A7%E5%8F%B3%E9%93%AD/</loc>
+    <lastmod>2024-03-02T00:48:19+08:00</lastmod>
+  </url><url>
+    <loc>https://banbu1118.github.io/posts/read/</loc>
+    <lastmod>2024-03-02T00:38:32+08:00</lastmod>
+  </url><url>
+    <loc>https://banbu1118.github.io/posts/read/linux_from_scratch_%E4%B8%AD%E6%96%87%E7%BF%BB%E8%AF%91/</loc>
+    <lastmod>2024-03-02T00:38:32+08:00</lastmod>
   </url><url>
     <loc>https://banbu1118.github.io/posts/ops/linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%B0%E5%A2%9E%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD/</loc>
     <lastmod>2024-03-02T00:23:20+08:00</lastmod>
@@ -62,25 +74,13 @@
     <loc>https://banbu1118.github.io/about/</loc>
     <lastmod>2023-12-11T00:40:11+08:00</lastmod>
   </url><url>
-    <loc>https://banbu1118.github.io/tags/life/</loc>
-    <lastmod>2022-05-05T00:18:15+08:00</lastmod>
-  </url><url>
-    <loc>https://banbu1118.github.io/posts/life/life/</loc>
-    <lastmod>2022-05-05T00:18:15+08:00</lastmod>
-  </url><url>
-    <loc>https://banbu1118.github.io/tags/</loc>
-    <lastmod>2022-05-05T00:18:15+08:00</lastmod>
-  </url><url>
-    <loc>https://banbu1118.github.io/posts/life/</loc>
-    <lastmod>2022-05-05T00:18:15+08:00</lastmod>
-  </url><url>
-    <loc>https://banbu1118.github.io/posts/read/</loc>
-    <lastmod>2022-05-05T00:18:06+08:00</lastmod>
-  </url><url>
     <loc>https://banbu1118.github.io/tags/read/</loc>
     <lastmod>2022-05-05T00:18:06+08:00</lastmod>
   </url><url>
     <loc>https://banbu1118.github.io/posts/read/read/</loc>
+    <lastmod>2022-05-05T00:18:06+08:00</lastmod>
+  </url><url>
+    <loc>https://banbu1118.github.io/tags/</loc>
     <lastmod>2022-05-05T00:18:06+08:00</lastmod>
   </url><url>
     <loc>https://banbu1118.github.io/archives/</loc>
