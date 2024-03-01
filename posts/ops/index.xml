@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>🧱 运维 on Banbu1118&#39;s Blog</title>
+    <link>https://banbu1118.github.io/posts/ops/</link>
+    <description>Recent content in 🧱 运维 on Banbu1118&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sat, 02 Mar 2024 00:23:20 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/posts/ops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux虚拟机新增磁盘挂载</title>
+      <link>https://banbu1118.github.io/posts/ops/linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%B0%E5%A2%9E%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD/</link>
+      <pubDate>Sat, 02 Mar 2024 00:23:20 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%B0%E5%A2%9E%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD/</guid>
+      <description>查看磁盘是否挂载 #查看磁盘是否挂载 lsblk #注意：新添加的磁盘需要重启虚拟机才能显示添加成功 分区 #使用cfdisk或fdisk进行分区 fdisk /dev/sdb #开始对/sdb 分区 m 显示命令列表 p 显示磁盘分区 同 fdisk –l n 新增分区 d 删除分区 w 写入并退出  说明： 开始分区后输入 n，新增分区，然后选择 p ，分区类型为主</description>
+    </item>
+    
+    <item>
+      <title>Windows删除分区</title>
+      <link>https://banbu1118.github.io/posts/ops/windows%E5%88%A0%E9%99%A4%E5%88%86%E5%8C%BA/</link>
+      <pubDate>Sat, 02 Mar 2024 00:22:20 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/windows%E5%88%A0%E9%99%A4%E5%88%86%E5%8C%BA/</guid>
+      <description>磁盘扩容时需要删除恢复分区才能操作 #管理员权限执行cmd #启用diskpart工具 diskpart #查看磁盘 list disk #选择需要操作的磁盘 select disk 0 #查看分区 list partition #选择需要操作的分区 select partition 3 #删除分区 delete partition override #退出 exit</description>
+    </item>
+    
+    <item>
+      <title>Pve Ceph超融合搭建</title>
+      <link>https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Thu, 29 Feb 2024 21:50:59 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/</guid>
+      <description>环境介绍</description>
+    </item>
+    
+    <item>
+      <title>Pve改文件存储</title>
+      <link>https://banbu1118.github.io/posts/ops/pve%E6%94%B9%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/</link>
+      <pubDate>Thu, 29 Feb 2024 21:34:19 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve%E6%94%B9%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/</guid>
+      <description>local-lvm改目录存储，提升运行速度 #实测pve7和8都行 pvesh delete /storage/local-lvm umount /dev/pve/data lvremove /dev/pve/data -y vgdisplay pve | grep Free | awk &amp;#39;{print &amp;#34;lvcreate -l &amp;#34; $5 &amp;#34; -n data pve -y&amp;#34;}&amp;#39; |bash mkfs.ext4 /dev/pve/data mkdir /mnt/data mount /dev/pve/data /mnt/data echo &amp;#34;/dev/pve/data /mnt/data ext4 defaults 0 0&amp;#34; &amp;gt;&amp;gt; /etc/fstab pvesm add dir data --path=/mnt/data 详情参考链接 [Proxmox的local-lvm改文件存储，提升运行速度](https://www.cnblogs.com</description>
+    </item>
+    
+    <item>
+      <title>Pve离线下载安装包</title>
+      <link>https://banbu1118.github.io/posts/ops/pve%E7%A6%BB%E7%BA%BF%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%8C%85/</link>
+      <pubDate>Wed, 03 Jan 2024 23:29:01 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve%E7%A6%BB%E7%BA%BF%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%8C%85/</guid>
+      <description>前言 #最好确保离线环境和联网环境一致，防止出现依赖关系问题 联网环境下载包 #下载包及其依赖关系，下载的包默认保存在/var/cache/apt/archives中，和以前下载的包一起，不容易分辨，不推荐这个命令 #apt install -d + 安装包名称 #下载包及其依赖关系到指定目录（推荐使用这个） #创建一</description>
+    </item>
+    
+    <item>
+      <title>Pve离线升级系统</title>
+      <link>https://banbu1118.github.io/posts/ops/pve%E7%A6%BB%E7%BA%BF%E5%8D%87%E7%BA%A7%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Wed, 03 Jan 2024 23:26:31 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve%E7%A6%BB%E7%BA%BF%E5%8D%87%E7%BA%A7%E7%B3%BB%E7%BB%9F/</guid>
+      <description>前言 #此教程可以让pve进行小版本的升级，例如，从pve7.4-3升级到pve7.4-17 #最好确保离线环境和联网环境一致，防止出现依赖关系问题 联网升级完成的pve环境 #进去apt下载包的缓存目录 cd /var/cache/apt/ 拷贝文件到离线设备 #拷贝archives文件夹到离线设备的/var/cache/</description>
+    </item>
+    
+    <item>
+      <title>Pve7升级pve8一键脚本</title>
+      <link>https://banbu1118.github.io/posts/ops/pve7%E5%8D%87%E7%BA%A7pve8%E4%B8%80%E9%94%AE%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Wed, 03 Jan 2024 23:15:46 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve7%E5%8D%87%E7%BA%A7pve8%E4%B8%80%E9%94%AE%E8%84%9A%E6%9C%AC/</guid>
+      <description>#/bin/bash #pve升级检查 pve7to8 pve7to8 --full #查看版本 #pveversion #更换为pve8的源 echo &amp;#34; deb https://mirrors.ustc.edu.cn/debian bookworm main contrib deb https://mirrors.ustc.edu.cn/debian bookworm-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bookworm-security main contrib &amp;#34; &amp;gt; /etc/apt/sources.list echo &amp;#34; deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bookworm pve-no-subscription &amp;#34; &amp;gt; /etc/apt/sources.list.d/pve-no-subscription.list #开始升级pve8 apt update -y apt dist-upgrade -y</description>
+    </item>
+    
+    <item>
+      <title>Pve7和8一键换源脚本</title>
+      <link>https://banbu1118.github.io/posts/ops/pve7%E5%92%8C8%E4%B8%80%E9%94%AE%E6%8D%A2%E6%BA%90%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Wed, 27 Dec 2023 20:18:16 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve7%E5%92%8C8%E4%B8%80%E9%94%AE%E6%8D%A2%E6%BA%90%E8%84%9A%E6%9C%AC/</guid>
+      <description>#!/bin/bash # Backup original sources.list cp /etc/apt/sources.list /etc/apt/sources.list.bak # Backup ceph.list if [ -e /etc/apt/sources.list.d/ceph.list ]; then cp /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.list.bak fi # Backup pve-no-subscription.list if [ -e /etc/apt/sources.list.d/pve-no-subscription.list ]; then cp /etc/apt/sources.list.d/pve-no-subscription.list /etc/apt//sources.list.d/pve-no-subscription.list.bak fi # Backup pve-enterprise.list cp /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak # Determine Proxmox VE version pve_version=$(pveversion|awk -F &amp;#39;/&amp;#39; &amp;#39;{print $2}&amp;#39;|cut -c1) # prohibit ceph if [ -e /etc/apt/sources.list.d/ceph.list ]; then sed -i &amp;#39;1s/^/# /&amp;#39; /etc/apt/sources.list.d/ceph.list fi #prohibit pve-enterprise sed -i &amp;#39;1s/^/# /&amp;#39; /etc/apt/sources.list.d/pve-enterprise.list # Update sources.list with ustc mirror based on the detected Proxmox VE version if [[ $pve_version == &amp;#34;7&amp;#34; ]]; then echo &amp;#34; deb https://mirrors.ustc.edu.cn/debian bullseye main contrib deb https://mirrors.ustc.edu.cn/debian bullseye-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib &amp;#34; &amp;gt; /etc/apt/sources.list echo &amp;#34; deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription &amp;#34; &amp;gt; /etc/apt/sources.list.d/pve-no-subscription.list elif [[ $pve_version == &amp;#34;8&amp;#34; ]]; then echo &amp;#34; deb https://mirrors.ustc.edu.cn/debian bookworm main contrib deb</description>
+    </item>
+    
+    <item>
+      <title>Uos Kylin Lvm扩容</title>
+      <link>https://banbu1118.github.io/posts/ops/uos-kylin-lvm%E6%89%A9%E5%AE%B9/</link>
+      <pubDate>Mon, 25 Dec 2023 19:20:02 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/uos-kylin-lvm%E6%89%A9%E5%AE%B9/</guid>
+      <description>kylin磁盘扩容 前提 kylin安装时选择了lvm模式 虚拟机关闭状态下调整磁盘大小 开机后，使用终端扩容 3.1 查看分区情况，发现sda磁盘已扩容，但是系统本身并未自动扩容 administrator@pc:~$ sudo lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT sda 8:0 0 150G 0 disk ├─sda1 8:1 0 2G 0 part /boot ├─sda2 8:2 0 1K 0 part └─sda5 8:5 0 98G 0 part ├─kylin-</description>
+    </item>
+    
+    <item>
+      <title>搭建dhcp服务器</title>
+      <link>https://banbu1118.github.io/posts/ops/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <pubDate>Sat, 16 Dec 2023 19:56:20 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description>搭建dhcp服务 centos7搭建dhcp服务 1.centos7配置静态ip #使用nmtui配置静态ip 安装dhcp yum install dhcp 复制实例文件到配置目录 cp /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example dhcpd.conf 编辑dhcp.conf文件，如下所示 subnet 192.168.8.0 netmask 255.255.255.0 { option domain-name-servers 192.168.8.1; range 192.168.8.100 192.168.8.101; option routers 192.168.8.1; default-lease-time 600; max-lease-time 7200; } # 参考文档：https://blog.csdn.net/</description>
+    </item>
+    
+    <item>
+      <title>添加和删除系统引导</title>
+      <link>https://banbu1118.github.io/posts/ops/%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC/</link>
+      <pubDate>Fri, 15 Dec 2023 21:00:22 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC/</guid>
+      <description>前言 当成功安装系统（windows或linux）后，设备开机找不到引导，无法在bios界面添加时。 可以采用以下方法在uefi shell里添加或删除引导 添加引导 # 查看是否有efi目录，有则继续 ls fs0: # 查看是否有引导目录 ls fs0:\efi # 以pve为例 ls fs0:\efi\proxmox # 添加引导 bcfg boot add 0 fs0:\efi\proxmox\grubx64.efi #添加完成后，进入bio</description>
+    </item>
+    
+    <item>
+      <title>Docker学习笔记</title>
+      <link>https://banbu1118.github.io/posts/ops/dock%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Thu, 14 Dec 2023 22:10:50 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/dock%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>前言 一、Docker为什么会出现 解决运维开发过程中部署环境的冲突 二、Docker历史 2013年发布 三、Docker的思想 集装箱 标准化 隔离性 四、Docker的优势 快速部署，节约资源 五、Docker基本组成 客户端、服务器、仓库 镜像（imag）：镜像文件 容器（container）：运行</description>
+    </item>
+    
+    <item>
+      <title>Vpn快速搭建</title>
+      <link>https://banbu1118.github.io/posts/ops/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Thu, 14 Dec 2023 22:00:50 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/</guid>
+      <description>注意事项 购买国外云服务器（香港和澳门的服务器也不推荐） 推荐使用腾讯云或阿里云的抢占式云服务器，价格便宜，注意实例释放时间！！！！ ssr 参考链接：https://thetowerinfo.com/zh/setup-shadowsocks-server-china/ 获取ssr安装脚本 wget --no-check-certificate</description>
+    </item>
+    
+  </channel>
+</rss>
