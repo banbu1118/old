@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Windows删除分区 | Banbu1118&#39;s Blog</title>
+<title>Linux系统网络带宽和网卡状态检测 | Banbu1118&#39;s Blog</title>
 <meta name="keywords" content="">
-<meta name="description" content="磁盘扩容时需要删除恢复分区才能操作 #管理员权限执行cmd #启用diskpart工具 diskpart #查看磁盘 list disk #选择需要操作的磁盘 select disk 0 #查看分区 list partition #选择需要操作的分区 select partition 3 #删除分区 delete partition override #退出 exit">
+<meta name="description" content="带宽测试 #安装iperf apt install iperf #测试server-1和server-2之间的带宽 #server-1作为服务端 iperf -s #server作为客户端,192.168.1.10为sever-1的ip iperf -c 192.168.1.10 网络流量检测 #安装iptop apt install iftop #监控vmbr0的流量 iftop -i vmbr0 查看网卡接口的接口速度 #安装">
 <meta name="author" content="Banbu1118">
-<link rel="canonical" href="https://banbu1118.github.io/posts/ops/windows%E5%88%A0%E9%99%A4%E5%88%86%E5%8C%BA/">
+<link rel="canonical" href="https://banbu1118.github.io/posts/ops/linux%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E5%B8%A6%E5%AE%BD%E5%92%8C%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://banbu1118.github.io/img/Q.jpg">
@@ -73,16 +73,16 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-<meta property="og:title" content="Windows删除分区" />
-<meta property="og:description" content="磁盘扩容时需要删除恢复分区才能操作 #管理员权限执行cmd #启用diskpart工具 diskpart #查看磁盘 list disk #选择需要操作的磁盘 select disk 0 #查看分区 list partition #选择需要操作的分区 select partition 3 #删除分区 delete partition override #退出 exit" />
+<meta property="og:title" content="Linux系统网络带宽和网卡状态检测" />
+<meta property="og:description" content="带宽测试 #安装iperf apt install iperf #测试server-1和server-2之间的带宽 #server-1作为服务端 iperf -s #server作为客户端,192.168.1.10为sever-1的ip iperf -c 192.168.1.10 网络流量检测 #安装iptop apt install iftop #监控vmbr0的流量 iftop -i vmbr0 查看网卡接口的接口速度 #安装" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://banbu1118.github.io/posts/ops/windows%E5%88%A0%E9%99%A4%E5%88%86%E5%8C%BA/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-03-02T00:22:20+08:00" />
-<meta property="article:modified_time" content="2024-03-02T00:22:20+08:00" />
+<meta property="og:url" content="https://banbu1118.github.io/posts/ops/linux%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E5%B8%A6%E5%AE%BD%E5%92%8C%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-03-04T19:50:03+08:00" />
+<meta property="article:modified_time" content="2024-03-04T19:50:03+08:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Windows删除分区"/>
-<meta name="twitter:description" content="磁盘扩容时需要删除恢复分区才能操作 #管理员权限执行cmd #启用diskpart工具 diskpart #查看磁盘 list disk #选择需要操作的磁盘 select disk 0 #查看分区 list partition #选择需要操作的分区 select partition 3 #删除分区 delete partition override #退出 exit"/>
+<meta name="twitter:title" content="Linux系统网络带宽和网卡状态检测"/>
+<meta name="twitter:description" content="带宽测试 #安装iperf apt install iperf #测试server-1和server-2之间的带宽 #server-1作为服务端 iperf -s #server作为客户端,192.168.1.10为sever-1的ip iperf -c 192.168.1.10 网络流量检测 #安装iptop apt install iftop #监控vmbr0的流量 iftop -i vmbr0 查看网卡接口的接口速度 #安装"/>
 
 
 <script type="application/ld+json">
@@ -107,8 +107,8 @@ var _hmt = _hmt || [];
     {
       "@type": "ListItem",
       "position":  3 ,
-      "name": "Windows删除分区",
-      "item": "https://banbu1118.github.io/posts/ops/windows%E5%88%A0%E9%99%A4%E5%88%86%E5%8C%BA/"
+      "name": "Linux系统网络带宽和网卡状态检测",
+      "item": "https://banbu1118.github.io/posts/ops/linux%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E5%B8%A6%E5%AE%BD%E5%92%8C%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B/"
     }
   ]
 }
@@ -117,24 +117,24 @@ var _hmt = _hmt || [];
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Windows删除分区",
-  "name": "Windows删除分区",
-  "description": "磁盘扩容时需要删除恢复分区才能操作 #管理员权限执行cmd #启用diskpart工具 diskpart #查看磁盘 list disk #选择需要操作的磁盘 select disk 0 #查看分区 list partition #选择需要操作的分区 select partition 3 #删除分区 delete partition override #退出 exit",
+  "headline": "Linux系统网络带宽和网卡状态检测",
+  "name": "Linux系统网络带宽和网卡状态检测",
+  "description": "带宽测试 #安装iperf apt install iperf #测试server-1和server-2之间的带宽 #server-1作为服务端 iperf -s #server作为客户端,192.168.1.10为sever-1的ip iperf -c 192.168.1.10 网络流量检测 #安装iptop apt install iftop #监控vmbr0的流量 iftop -i vmbr0 查看网卡接口的接口速度 #安装",
   "keywords": [
     ""
   ],
-  "articleBody": " 磁盘扩容时需要删除恢复分区才能操作 #管理员权限执行cmd #启用diskpart工具 diskpart #查看磁盘 list disk #选择需要操作的磁盘 select disk 0 #查看分区 list partition #选择需要操作的分区 select partition 3 #删除分区 delete partition override #退出 exit ",
-  "wordCount" : "94",
+  "articleBody": " 带宽测试 #安装iperf apt install iperf #测试server-1和server-2之间的带宽 #server-1作为服务端 iperf -s #server作为客户端,192.168.1.10为sever-1的ip iperf -c 192.168.1.10 网络流量检测 #安装iptop apt install iftop #监控vmbr0的流量 iftop -i vmbr0 查看网卡接口的接口速度 #安装ethtool apt install ethtool #查看eth0的速度 ethtool eth0 ",
+  "wordCount" : "162",
   "inLanguage": "zh",
-  "datePublished": "2024-03-02T00:22:20+08:00",
-  "dateModified": "2024-03-02T00:22:20+08:00",
+  "datePublished": "2024-03-04T19:50:03+08:00",
+  "dateModified": "2024-03-04T19:50:03+08:00",
   "author":[{
     "@type": "Person",
     "name": "Banbu1118"
   }],
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://banbu1118.github.io/posts/ops/windows%E5%88%A0%E9%99%A4%E5%88%86%E5%8C%BA/"
+    "@id": "https://banbu1118.github.io/posts/ops/linux%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E5%B8%A6%E5%AE%BD%E5%92%8C%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B/"
   },
   "publisher": {
     "@type": "Organization",
@@ -245,7 +245,7 @@ var _hmt = _hmt || [];
         <header class="post-header">
             <div class="breadcrumbs"><a href="https://banbu1118.github.io/">🏠 主页</a>&nbsp;»&nbsp;<a href="https://banbu1118.github.io/posts/">📚文章</a>&nbsp;»&nbsp;<a href="https://banbu1118.github.io/posts/ops/">🧱 运维</a></div>
             <h1 class="post-title">
-                Windows删除分区
+                Linux系统网络带宽和网卡状态检测
             </h1>
             <div class="post-meta">
 
@@ -266,7 +266,7 @@ var _hmt = _hmt || [];
 <span class="parent-post-meta">
     <span id="post_meta_style_1">
         <span class="fa fa-calendar-check-o"></span>
-        <span>2024-03-02
+        <span>2024-03-04
             &nbsp;&nbsp;
         </span>
     </span>
@@ -279,7 +279,7 @@ var _hmt = _hmt || [];
     
     <span id="post_meta_style_3">
         <span class="fa fa-file-word-o"></span>
-        <span>94字
+        <span>162字
             &nbsp;&nbsp;
         </span>
     </span>
@@ -353,29 +353,34 @@ var _hmt = _hmt || [];
 </div>
         </header> 
         <div class="post-content"><ul>
-<li>磁盘扩容时需要删除恢复分区才能操作</li>
+<li>带宽测试</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>#管理员权限执行cmd
-</span></span><span style="display:flex;"><span>#启用diskpart工具
-</span></span><span style="display:flex;"><span>diskpart
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#安装iperf</span>
+</span></span><span style="display:flex;"><span>apt install iperf
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>#查看磁盘
-</span></span><span style="display:flex;"><span>list disk
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#测试server-1和server-2之间的带宽</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>#选择需要操作的磁盘
-</span></span><span style="display:flex;"><span>select disk 0
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#server-1作为服务端</span>
+</span></span><span style="display:flex;"><span>iperf -s
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>#查看分区
-</span></span><span style="display:flex;"><span>list partition
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#server作为客户端,192.168.1.10为sever-1的ip</span>
+</span></span><span style="display:flex;"><span>iperf -c 192.168.1.10
+</span></span></code></pre></div><ul>
+<li>网络流量检测</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#安装iptop</span>
+</span></span><span style="display:flex;"><span>apt install iftop
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>#选择需要操作的分区
-</span></span><span style="display:flex;"><span>select partition 3
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#监控vmbr0的流量</span>
+</span></span><span style="display:flex;"><span>iftop -i vmbr0
+</span></span></code></pre></div><ul>
+<li>查看网卡接口的接口速度</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#安装ethtool</span>
+</span></span><span style="display:flex;"><span>apt install ethtool
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>#删除分区
-</span></span><span style="display:flex;"><span>delete partition override
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>#退出
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">exit</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#查看eth0的速度</span>
+</span></span><span style="display:flex;"><span>ethtool eth0
 </span></span></code></pre></div>
 
         </div>

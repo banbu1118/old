@@ -355,17 +355,17 @@ var _hmt = _hmt || [];
         <div class="post-content"><ul>
 <li>查看磁盘是否挂载</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>#查看磁盘是否挂载
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#查看磁盘是否挂载</span>
 </span></span><span style="display:flex;"><span>lsblk
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>#注意：新添加的磁盘需要重启虚拟机才能显示添加成功
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#注意：新添加的磁盘需要重启虚拟机才能显示添加成功</span>
 </span></span></code></pre></div><ul>
 <li>分区</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>#使用cfdisk或fdisk进行分区
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#使用cfdisk或fdisk进行分区</span>
 </span></span><span style="display:flex;"><span>fdisk /dev/sdb
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>#开始对/sdb 分区
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#开始对/sdb 分区</span>
 </span></span><span style="display:flex;"><span>m    显示命令列表
 </span></span><span style="display:flex;"><span>p    显示磁盘分区 同 fdisk –l
 </span></span><span style="display:flex;"><span>n    新增分区
@@ -376,49 +376,49 @@ var _hmt = _hmt || [];
 </span></span></code></pre></div><ul>
 <li>格式化分区</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>#lsblk -f 查看分区相关信息，分区没格式化还不能用
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#lsblk -f 查看分区相关信息，分区没格式化还不能用</span>
 </span></span><span style="display:flex;"><span>root@debian:~# lsblk  -f
 </span></span><span style="display:flex;"><span>NAME   FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
 </span></span><span style="display:flex;"><span>sda
 </span></span><span style="display:flex;"><span>├─sda1 ext4   1.0         229516e6-3292-4450-ad60-a875f6c86f63   84.5G     8% /
 </span></span><span style="display:flex;"><span>├─sda2
-</span></span><span style="display:flex;"><span>└─sda5 swap   1           f34e6bd4-4bf6-4968-9f2d-53492d01abdc                [SWAP]
+</span></span><span style="display:flex;"><span>└─sda5 swap   <span style="color:#ae81ff">1</span>           f34e6bd4-4bf6-4968-9f2d-53492d01abdc                <span style="color:#f92672">[</span>SWAP<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>sdb
-</span></span><span style="display:flex;"><span>└─sdb1                    #没有发现唯一的40位标识符，说明没有被格式化
+</span></span><span style="display:flex;"><span>└─sdb1                    <span style="color:#75715e">#没有发现唯一的40位标识符，说明没有被格式化</span>
 </span></span><span style="display:flex;"><span>sr0
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>#分配40位唯一标识符，格式化分区
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#分配40位唯一标识符，格式化分区</span>
 </span></span><span style="display:flex;"><span>mkfs -t ext4 /dev/sdb1
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>#lsblk -f查看是否格式化完成
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#lsblk -f查看是否格式化完成</span>
 </span></span><span style="display:flex;"><span>root@debian:~# lsblk  -f
 </span></span><span style="display:flex;"><span>NAME   FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
 </span></span><span style="display:flex;"><span>sda
 </span></span><span style="display:flex;"><span>├─sda1 ext4   1.0         229516e6-3292-4450-ad60-a875f6c86f63   84.5G     8% /
 </span></span><span style="display:flex;"><span>├─sda2
-</span></span><span style="display:flex;"><span>└─sda5 swap   1           f34e6bd4-4bf6-4968-9f2d-53492d01abdc                [SWAP]
+</span></span><span style="display:flex;"><span>└─sda5 swap   <span style="color:#ae81ff">1</span>           f34e6bd4-4bf6-4968-9f2d-53492d01abdc                <span style="color:#f92672">[</span>SWAP<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>sdb
-</span></span><span style="display:flex;"><span>└─sdb1 ext4   1.0         e65cfa9d-9f00-4352-a0d1-033576b545d4            #已生成有唯一标识符
+</span></span><span style="display:flex;"><span>└─sdb1 ext4   1.0         e65cfa9d-9f00-4352-a0d1-033576b545d4            <span style="color:#75715e">#已生成有唯一标识符</span>
 </span></span><span style="display:flex;"><span>sr0
 </span></span></code></pre></div><ul>
 <li>挂载</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>#临时挂载
-</span></span><span style="display:flex;"><span>#新建目录命令
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#临时挂载</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#新建目录命令</span>
 </span></span><span style="display:flex;"><span>mkdir /kk
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>#提升权限（选做）
-</span></span><span style="display:flex;"><span>chmod 777 /kk
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#提升权限（选做）</span>
+</span></span><span style="display:flex;"><span>chmod <span style="color:#ae81ff">777</span> /kk
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>#挂载
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#挂载</span>
 </span></span><span style="display:flex;"><span>mount /dev/sdb1 /kk/
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>##永久挂载
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##永久挂载</span>
 </span></span><span style="display:flex;"><span>nano /etc/fstab
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>#末尾添加一行
-</span></span><span style="display:flex;"><span>/dev/sdb1    /kk    ext4    defaults    0    0
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#末尾添加一行</span>
+</span></span><span style="display:flex;"><span>/dev/sdb1    /kk    ext4    defaults    <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">0</span>
 </span></span></code></pre></div>
 
         </div>

@@ -6,7 +6,25 @@
     <description>Recent content in 🧱 运维 on Banbu1118&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Sat, 02 Mar 2024 00:23:20 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/posts/ops/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Mar 2024 19:50:03 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/posts/ops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux系统网络带宽和网卡状态检测</title>
+      <link>https://banbu1118.github.io/posts/ops/linux%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E5%B8%A6%E5%AE%BD%E5%92%8C%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B/</link>
+      <pubDate>Mon, 04 Mar 2024 19:50:03 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/linux%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E5%B8%A6%E5%AE%BD%E5%92%8C%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B/</guid>
+      <description>带宽测试 #安装iperf apt install iperf #测试server-1和server-2之间的带宽 #server-1作为服务端 iperf -s #server作为客户端,192.168.1.10为sever-1的ip iperf -c 192.168.1.10 网络流量检测 #安装iptop apt install iftop #监控vmbr0的流量 iftop -i vmbr0 查看网卡接口的接口速度 #安装</description>
+    </item>
+    
+    <item>
+      <title>Pve7 8 Ceph超融合部署换源脚本</title>
+      <link>https://banbu1118.github.io/posts/ops/pve7-8-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E9%83%A8%E7%BD%B2%E6%8D%A2%E6%BA%90%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Mon, 04 Mar 2024 19:42:33 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve7-8-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E9%83%A8%E7%BD%B2%E6%8D%A2%E6%BA%90%E8%84%9A%E6%9C%AC/</guid>
+      <description>pve7-8-ceph超融合部署换源脚本 #!/bin/bash # Backup original sources.list if [ -e /etc/apt/sources.list ]; then cp /etc/apt/sources.list /etc/apt/sources.list.bak fi # Backup pve-no-subscription.list if [ -e /etc/apt/sources.list.d/pve-no-subscription.list ]; then cp /etc/apt/sources.list.d/pve-no-subscription.list /etc/apt/sources.list.d/pve-no-subscription.list.bak fi # Backup pve-enterprise.list if [ -e /etc/apt/sources.list.d/pve-enterprise.list ]; then cp /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak fi # Backup ceph.list if [ -e /etc/apt/sources.list.d/ceph.list ]; then cp /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.list.bak fi # Backup pveceph.pm if [ -e /usr/share/perl5/PVE/CLI/pveceph.pm ]; then cp /usr/share/perl5/PVE/CLI/pveceph.pm /usr/share/perl5/PVE/CLI/pveceph.pm.bak fi # Determine Proxmox VE version pve_version=$(pveversion|awk -F &amp;#39;/&amp;#39; &amp;#39;{print $2}&amp;#39;|cut -c1) #prohibit pve-enterprise sed -i &amp;#39;1s/^/# /&amp;#39; /etc/apt/sources.list.d/pve-enterprise.list # Update sources.list with ustc mirror based on the detected Proxmox VE version if [[ $pve_version == &amp;#34;7&amp;#34; ]]; then echo &amp;#34; deb https://mirrors.ustc.edu.cn/debian bullseye main contrib deb https://mirrors.ustc.edu.cn/debian bullseye-updates main contrib # security updates</description>
+    </item>
+    
     <item>
       <title>Linux虚拟机新增磁盘挂载</title>
       <link>https://banbu1118.github.io/posts/ops/linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%B0%E5%A2%9E%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD/</link>
@@ -40,7 +58,7 @@
       <pubDate>Thu, 29 Feb 2024 21:34:19 +0800</pubDate>
       
       <guid>https://banbu1118.github.io/posts/ops/pve%E6%94%B9%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/</guid>
-      <description>local-lvm改目录存储，提升运行速度 #实测pve7和8都行 pvesh delete /storage/local-lvm umount /dev/pve/data lvremove /dev/pve/data -y vgdisplay pve | grep Free | awk &amp;#39;{print &amp;#34;lvcreate -l &amp;#34; $5 &amp;#34; -n data pve -y&amp;#34;}&amp;#39; |bash mkfs.ext4 /dev/pve/data mkdir /mnt/data mount /dev/pve/data /mnt/data echo &amp;#34;/dev/pve/data /mnt/data ext4 defaults 0 0&amp;#34; &amp;gt;&amp;gt; /etc/fstab pvesm add dir data --path=/mnt/data 详情参考链接 [Proxmox的local-lvm改文件存储，提升运行速度](https://www.cnblogs.com</description>
+      <description>local-lvm改目录存储，提升运行速度 #实测pve7和8都行 pvesh delete /storage/local-lvm umount /dev/pve/data lvremove /dev/pve/data -y vgdisplay pve | grep Free | awk &amp;#39;{print &amp;#34;lvcreate -l &amp;#34; $5 &amp;#34; -n data pve -y&amp;#34;}&amp;#39; |bash mkfs.ext4 /dev/pve/data mkdir /mnt/data mount /dev/pve/data /mnt/data echo &amp;#34;/dev/pve/data /mnt/data ext4 defaults 0 0&amp;#34; &amp;gt;&amp;gt; /etc/fstab pvesm add dir data --path=/mnt/data 详情参考链接 Proxmox的local-lvm改文件存储，提升运行速度</description>
     </item>
     
     <item>
