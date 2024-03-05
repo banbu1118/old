@@ -6,7 +6,16 @@
     <description>Recent content in 🧱 运维 on Banbu1118&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 04 Mar 2024 19:50:03 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/posts/ops/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Mar 2024 19:19:26 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/posts/ops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vgpu Licserver</title>
+      <link>https://banbu1118.github.io/posts/ops/vgpu-licserver/</link>
+      <pubDate>Tue, 05 Mar 2024 19:19:26 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/vgpu-licserver/</guid>
+      <description>vgpu授权服务器搭建方案 法律声明 此方案仅供测试使用，如有侵权行为，请联系我删除，本人不承担任何法律责任 方案来源 #本文章采用docker方案部署，其他部署请查看以下链接， https://github.com/GreenDamTan/fastapi-dls 生成ssl证书 WORKING_DIR=/opt/docker/fastapi-dls/cert mkdir -p $WORKING_DIR cd $WORKING_DIR # create instance private and public key for singing JWT&amp;#39;s openssl genrsa -out $WORKING_DIR/instance.private.pem 2048 openssl rsa -in $WORKING_DIR/instance.private.pem -outform PEM -pubout -out $WORKING_DIR/instance.public.pem # create ssl certificate for integrated webserver (uvicorn) - because clients rely on ssl openssl req -x509</description>
+    </item>
+    
     <item>
       <title>Linux系统网络带宽和网卡状态检测</title>
       <link>https://banbu1118.github.io/posts/ops/linux%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E5%B8%A6%E5%AE%BD%E5%92%8C%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B/</link>

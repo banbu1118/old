@@ -6,14 +6,23 @@
     <description>Recent content on Banbu1118&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Tue, 05 Mar 2024 19:08:08 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Mar 2024 19:19:26 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>常用工具下载链接</title>
-      <link>https://banbu1118.github.io/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</link>
-      <pubDate>Tue, 05 Mar 2024 19:08:08 +0800</pubDate>
+      <title>Vgpu Licserver</title>
+      <link>https://banbu1118.github.io/posts/ops/vgpu-licserver/</link>
+      <pubDate>Tue, 05 Mar 2024 19:19:26 +0800</pubDate>
       
-      <guid>https://banbu1118.github.io/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</guid>
-      <description></description>
+      <guid>https://banbu1118.github.io/posts/ops/vgpu-licserver/</guid>
+      <description>vgpu授权服务器搭建方案 法律声明 此方案仅供测试使用，如有侵权行为，请联系我删除，本人不承担任何法律责任 方案来源 #本文章采用docker方案部署，其他部署请查看以下链接， https://github.com/GreenDamTan/fastapi-dls 生成ssl证书 WORKING_DIR=/opt/docker/fastapi-dls/cert mkdir -p $WORKING_DIR cd $WORKING_DIR # create instance private and public key for singing JWT&amp;#39;s openssl genrsa -out $WORKING_DIR/instance.private.pem 2048 openssl rsa -in $WORKING_DIR/instance.private.pem -outform PEM -pubout -out $WORKING_DIR/instance.public.pem # create ssl certificate for integrated webserver (uvicorn) - because clients rely on ssl openssl req -x509</description>
+    </item>
+    
+    <item>
+      <title>常用工具链接</title>
+      <link>https://banbu1118.github.io/posts/read/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E9%93%BE%E6%8E%A5/</link>
+      <pubDate>Tue, 05 Mar 2024 19:17:58 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/read/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E9%93%BE%E6%8E%A5/</guid>
+      <description>itellyou #windows原版系统下载 https://msdn.itellyou.cn/ #需要登录 https://next.itellyou.cn ventoy #制作启动U盘的开源工具 https://ventoy.net/ alist #支持多种存储的文件列表程序，可以作为nas的替代品 https://alist.nn.ci/ 镜像站 #中科大镜像站 https://mirrors.ustc.edu.cn/ #清华镜像站 https://mirrors.tuna.tsinghua.edu.cn/</description>
     </item>
     
     <item>

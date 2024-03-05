@@ -6,7 +6,16 @@
     <description>Recent content in 📕 阅读 on Banbu1118&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Sat, 02 Mar 2024 00:38:32 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/posts/read/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Mar 2024 19:17:58 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/posts/read/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>常用工具链接</title>
+      <link>https://banbu1118.github.io/posts/read/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E9%93%BE%E6%8E%A5/</link>
+      <pubDate>Tue, 05 Mar 2024 19:17:58 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/read/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E9%93%BE%E6%8E%A5/</guid>
+      <description>itellyou #windows原版系统下载 https://msdn.itellyou.cn/ #需要登录 https://next.itellyou.cn ventoy #制作启动U盘的开源工具 https://ventoy.net/ alist #支持多种存储的文件列表程序，可以作为nas的替代品 https://alist.nn.ci/ 镜像站 #中科大镜像站 https://mirrors.ustc.edu.cn/ #清华镜像站 https://mirrors.tuna.tsinghua.edu.cn/</description>
+    </item>
+    
     <item>
       <title>Linux_From_Scratch_中文翻译</title>
       <link>https://banbu1118.github.io/posts/read/linux_from_scratch_%E4%B8%AD%E6%96%87%E7%BF%BB%E8%AF%91/</link>
