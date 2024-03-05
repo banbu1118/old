@@ -6,7 +6,16 @@
     <description>Recent content on Banbu1118&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 04 Mar 2024 19:50:03 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Mar 2024 19:08:08 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>常用工具下载链接</title>
+      <link>https://banbu1118.github.io/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</link>
+      <pubDate>Tue, 05 Mar 2024 19:08:08 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Linux系统网络带宽和网卡状态检测</title>
       <link>https://banbu1118.github.io/posts/ops/linux%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E5%B8%A6%E5%AE%BD%E5%92%8C%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B/</link>
@@ -62,12 +71,12 @@
     </item>
     
     <item>
-      <title>Pve Ceph超融合搭建</title>
-      <link>https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/</link>
+      <title>Pve Ceph超融合环境部署</title>
+      <link>https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</link>
       <pubDate>Thu, 29 Feb 2024 21:50:59 +0800</pubDate>
       
-      <guid>https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/</guid>
-      <description>环境介绍</description>
+      <guid>https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</guid>
+      <description>部署要求 部署最低要求 3台服务器 万兆网络 12块OSD硬盘（系统盘单独算） ceph存储 每台Server有5块盘，共15块，其中3块为pve系统盘，剩余12块为ceph的osd盘 其中ceph推荐使用ssd，如果有上百个机械也可不用ssd，ceph的速度和osd数量成正比 ceph的Clu</description>
     </item>
     
     <item>

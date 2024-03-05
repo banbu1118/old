@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="zh" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Pve Ceph超融合环境部署 | Banbu1118&#39;s Blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="部署要求 部署最低要求 3台服务器 万兆网络 12块OSD硬盘（系统盘单独算） ceph存储 每台Server有5块盘，共15块，其中3块为pve系统盘，剩余12块为ceph的osd盘 其中ceph推荐使用ssd，如果有上百个机械也可不用ssd，ceph的速度和osd数量成正比 ceph的Clu">
+<meta name="author" content="Banbu1118">
+<link rel="canonical" href="https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.js" onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://banbu1118.github.io/img/Q.jpg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://banbu1118.github.io/img/Q.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://banbu1118.github.io/img/Q.jpg">
+<link rel="apple-touch-icon" href="https://banbu1118.github.io/img/Q.jpg">
+<link rel="mask-icon" href="https://banbu1118.github.io/img/Q.jpg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script defer src="https://unpkg.com/mermaid@8.8.1/dist/mermaid.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = ""; 
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<meta property="og:title" content="Pve Ceph超融合环境部署" />
+<meta property="og:description" content="部署要求 部署最低要求 3台服务器 万兆网络 12块OSD硬盘（系统盘单独算） ceph存储 每台Server有5块盘，共15块，其中3块为pve系统盘，剩余12块为ceph的osd盘 其中ceph推荐使用ssd，如果有上百个机械也可不用ssd，ceph的速度和osd数量成正比 ceph的Clu" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-02-29T21:50:59+08:00" />
+<meta property="article:modified_time" content="2024-02-29T21:50:59+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pve Ceph超融合环境部署"/>
+<meta name="twitter:description" content="部署要求 部署最低要求 3台服务器 万兆网络 12块OSD硬盘（系统盘单独算） ceph存储 每台Server有5块盘，共15块，其中3块为pve系统盘，剩余12块为ceph的osd盘 其中ceph推荐使用ssd，如果有上百个机械也可不用ssd，ceph的速度和osd数量成正比 ceph的Clu"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+
+        {
+          "@type": "ListItem",
+          "position":  1 ,
+          "name": "📚文章",
+          "item": "https://banbu1118.github.io/posts/"
+        },
+
+        {
+          "@type": "ListItem",
+          "position":  2 ,
+          "name": "🧱 运维",
+          "item": "https://banbu1118.github.io/posts/ops/"
+        }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Pve Ceph超融合环境部署",
+      "item": "https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Pve Ceph超融合环境部署",
+  "name": "Pve Ceph超融合环境部署",
+  "description": "部署要求 部署最低要求 3台服务器 万兆网络 12块OSD硬盘（系统盘单独算） ceph存储 每台Server有5块盘，共15块，其中3块为pve系统盘，剩余12块为ceph的osd盘 其中ceph推荐使用ssd，如果有上百个机械也可不用ssd，ceph的速度和osd数量成正比 ceph的Clu",
+  "keywords": [
+    ""
+  ],
+  "articleBody": "部署要求 部署最低要求 3台服务器 万兆网络 12块OSD硬盘（系统盘单独算） ceph存储 每台Server有5块盘，共15块，其中3块为pve系统盘，剩余12块为ceph的osd盘 其中ceph推荐使用ssd，如果有上百个机械也可不用ssd，ceph的速度和osd数量成正比 ceph的Cluster Network流量较大，为不影响业务，推荐单独接一个交换机 ceph的硬盘模式推荐为直通模式，raid会影响其crush算法的存储效率 网络规划 服务器 pve管理网络 pve业务网络 Public Network Cluster Network server-1 192.168.1.110 192.168.1.110 10.0.0.10 172.16.1.10 server-1 192.168.1.120 192.168.1.120 10.0.0.20 172.16.1.20 server-1 192.168.1.130 192.168.1.130 10.0.0.30 172.16.1.30 网络架构图 安装步骤 ！！！注意：每台服务器都要配置，具体看安装步骤\n修改主机名（每台主机名不能重复） hostnamectl set-hostname pve-ceph01 设置/etc/hosts主机名 #nano /etc/hosts 192.168.1.151 pve-ceph01.localhost pve-ceph01 pve7或pve8换中科大源 #!/bin/bash # Backup original sources.list if [ -e /etc/apt/sources.list ]; then cp /etc/apt/sources.list /etc/apt/sources.list.bak fi # Backup pve-no-subscription.list if [ -e /etc/apt/sources.list.d/pve-no-subscription.list ]; then cp /etc/apt/sources.list.d/pve-no-subscription.list /etc/apt/sources.list.d/pve-no-subscription.list.bak fi # Backup pve-enterprise.list if [ -e /etc/apt/sources.list.d/pve-enterprise.list ]; then cp /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak fi # Backup ceph.list if [ -e /etc/apt/sources.list.d/ceph.list ]; then cp /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.list.bak fi # Backup pveceph.pm if [ -e /usr/share/perl5/PVE/CLI/pveceph.pm ]; then cp /usr/share/perl5/PVE/CLI/pveceph.pm /usr/share/perl5/PVE/CLI/pveceph.pm.bak fi # Determine Proxmox VE version pve_version=$(pveversion|awk -F '/' '{print $2}'|cut -c1) #prohibit pve-enterprise sed -i '1s/^/# /' /etc/apt/sources.list.d/pve-enterprise.list # Update sources.list with ustc mirror based on the detected Proxmox VE version if [[ $pve_version == \"7\" ]]; then echo \" deb https://mirrors.ustc.edu.cn/debian bullseye main contrib deb https://mirrors.ustc.edu.cn/debian bullseye-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib \" \u003e /etc/apt/sources.list echo \" deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription \" \u003e /etc/apt/sources.list.d/pve-no-subscription.list echo \" deb http://mirrors.ustc.edu.cn/proxmox/debian/ceph-quincy bullseye main \" \u003e /etc/apt/sources.list.d/ceph.list # 换中科大源，一定要修改这里，不然每次面板安装ceph时他会根据这里的配置生成 ceph.list 源文件 sed -i \"s#http://download.proxmox.com/debian#https://mirrors.ustc.edu.cn/proxmox/debian#g\" /usr/share/perl5/PVE/CLI/pveceph.pm elif [[ $pve_version == \"8\" ]]; then echo \" deb https://mirrors.ustc.edu.cn/debian bookworm main contrib deb https://mirrors.ustc.edu.cn/debian bookworm-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bookworm-security main contrib \" \u003e /etc/apt/sources.list echo \" deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bookworm pve-no-subscription \" \u003e /etc/apt/sources.list.d/pve-no-subscription.list echo \" deb https://mirrors.ustc.edu.cn/proxmox/debian/ceph-quincy/ bookworm no-subscription \" \u003e /etc/apt/sources.list.d/ceph.list # 换中科大源，一定要修改这里，不然每次面板安装ceph时他会根据这里的配置生成 ceph.list 源文件 sed -i 's|http://download.proxmox.com|https://mirrors.ustc.edu.cn/proxmox|g' /usr/share/perl5/PVE/CLI/pveceph.pm else echo \"Unsupported Proxmox VE version.\" exit 1 fi # Update package index apt update echo \"APT sources have been updated with ustc mirror for Proxmox VE $pve_version.\" 更新索引和时间同步 #安装ntp服务 apt install ntpdate -y #与阿里云时间服务器时间同步，内网也可指定时间同步服务器（具体操作百度） echo \"0 0 * * 6 ntpdate ntp1.aliyun.com\" \u003e\u003e /var/spool/cron/crontabs/root 配置ceph网络 #编辑/etc/network/interfaces，增加cluster network和public network #此处网卡为ens19和ens20，实际部署看情况，也可在web界面配置ip auto lo iface lo inet loopback iface ens18 inet manual auto ens19 iface ens19 inet static address 10.0.0.10/24 auto ens20 iface ens20 inet static address 172.16.1.10/24 auto vmbr0 iface vmbr0 inet static address 192.168.1.110/24 gateway 192.168.1.1 bridge-ports ens18 bridge-stp off bridge-fd 0 #重启networking让配置生效 systemctl restart networking #检测配置的ip是否生效 hostname -I 核实服务器之间的带宽，确保网络质量满足部署ceph的要求 #安装iperf apt install iperf #测试server-1和server-2之间的带宽 #server-1作为服务端 iperf -s #server作为客户端,10.0.0.10和172.16.1.10为sever-1的public network 与cluster network iperf -c 10.0.0.10 iperf -c 172.16.1.10 创建集群（此步骤只在一台服务器操作） #创建一个名为pve的集群 pvecm create pve #检测集群状态 pvecm status 其他服务器加入集群 #这个ip为pve的管理ip/业务ip pvecm add 192.168.1.110 #检测集群状态 pvecm status 安装ceph #pve7安装ceph的quincy版本 pveceph install --version quincy --allow-experimental 0 #pve8安装ceph的reef版本 pveceph install --version reef --repository no-subscription --allow-experimental 0 ceph网络初始化（此步骤只在一台服务器操作） pveceph init --network 10.0.0.10/24 --cluster-network 172.16.1.10/24 增加ceph 监视器和管理器(提高集群高可用) #创建监视器 pveceph mon create #创建管理器 pveceph mgr create 创建osd盘 #检测可以用来创建OSD的磁盘 lsblk #创建OSD盘，此处为sdb，具体部署看实际情况 pveceph osd create /dev/sdb #如果磁盘以前正在使用（例如，用于 ZFS 或作为 OSD），则首先需要清除该使用的所有痕迹。要删除分区表、引导扇区和任何其他剩余的 OSD，可以使用以下命令 ceph-volume lvm zap /dev/sd[X] --destroy 创建存储池（此步骤只在一台服务器操作） pveceph pool create deskpool --add_storages 排错常用命令 #！！！以下内容ceph供排错使用 #查看ceph集群状态 seph -s #查看管理节点 ceph mon stat #查看监视节点 ceph mgr stat #查看osdh状态和osd目录树 ceph osd stat ceph osd tree #查看ceph的io ceph iostat #下线osd ceph osd down 0 #让编号为0的osd down掉，此时该osd不接受读写请求，但仍然活着 #拉起osd ceph osd up 0 #让编号为0的osd up，此时该osd接受读写请求 #将osd逐出集群 ceph osd out 0 #将一个编号为0的osd逐出集群，此时可以做维护 #将osd加入集群 ceph osd in 0 #将一个编号为0的osd加入集群 #删除osd ceph osd rm 0 #在集群中删除一个 osd,可能需要先 stop 该 osd,即 stop osd.0 #删除host节点：ceph osd crush rm node1 #在集群中删除一个host节点 #创建pool池：ceph osd pool create vms(名称) 64(64是PG) #CEPH服务常用命令 #重启mon服务 systemctl restart ceph-mon.target #重启osd服务 sysetmctl restart ceph-osd.target #重启mgr服务 systemctl restart ceph-mgr.target #删除pve节点 在正常节点上踢出故障节点 { #查看集群成员 + 查看集群状态 pvecm nodes pvecm status #在pve集群中删除故障节点 pvecm delnode $hostname #删除 故障节点的 ceph节点中故障的 mon信息（前提是有的话） ceph mon remove $hostname #删除故障节点上osd相关信息 ceph osd crush remove osd.$id ceph auth del osd.$id ceph osd rm osd.$id } 在故障节点上，清除集群信息，单机运行 { #首先在待隔离节点上停止 pve-cluster 服务 systemctl stop pve-cluster.service systemctl stop corosync.service #将待隔离节点的集群文件系统设置为本地模式 pmxcfs -l #接下来删除 corosync 配置文件 rm /etc/pve/corosync.conf rm -rf /etc/corosync/* #最后重新启动集群文件系统服务 killall pmxcfs #停止集群文件系统服务 systemctl start pve-cluster.service } #pg重建 ceph osd force-create-pg 1.0 --yes-i-really-mean-it #命令创建osd盘 ##此处的sdb具体看你添加的磁盘，可以lsblk查看 pveceph osd create /dev/sdb #彻底卸载ceph systemctl stop ceph-mon.target systemctl stop ceph-mgr.target systemctl stop ceph-mds.target systemctl stop ceph-osd.target rm -rf /etc/systemd/system/ceph* killall -9 ceph-mon ceph-mgr ceph-mds rm -rf /var/lib/ceph/mon/ /var/lib/ceph/mgr/ /var/lib/ceph/mds/ pveceph purge apt purge ceph-mon ceph-osd ceph-mgr ceph-mds apt purge ceph-base ceph-mgr-modules-core rm -rf /etc/ceph/* rm -rf /etc/pve/ceph.conf rm -rf /etc/pve/priv/ceph.* ",
+  "wordCount" : "2117",
+  "inLanguage": "zh",
+  "datePublished": "2024-02-29T21:50:59+08:00",
+  "dateModified": "2024-02-29T21:50:59+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "Banbu1118"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Banbu1118's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://banbu1118.github.io/img/Q.jpg"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    (function () {
+        let  arr,reg = new RegExp("(^| )"+"change-themes"+"=([^;]*)(;|$)");
+        if(arr = document.cookie.match(reg)) {
+        } else {
+            if (new Date().getHours() >= 19 || new Date().getHours() < 6) {
+                document.body.classList.add('dark');
+                localStorage.setItem("pref-theme", 'dark');
+            } else {
+                document.body.classList.remove('dark');
+                localStorage.setItem("pref-theme", 'light');
+            }
+        }
+    })()
+
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://banbu1118.github.io/" accesskey="h" title="Banbu1118&#39;s Blog (Alt + H)">
+            <img src="https://banbu1118.github.io/img/Q.jpg" alt="logo" aria-label="logo"
+                 height="35">Banbu1118&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://banbu1118.github.io/search" title="🔍 搜索 (Alt &#43; /)" accesskey=/>
+                <span>🔍 搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://banbu1118.github.io/" title="🏠 主页">
+                <span>🏠 主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://banbu1118.github.io/posts" title="📚 文章">
+                <span>📚 文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://banbu1118.github.io/archives/" title="⏱️ 时间轴">
+                <span>⏱️ 时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://banbu1118.github.io/about" title="🙋🏻‍♂️ 关于">
+                <span>🙋🏻‍♂️ 关于</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main page">
+<style>
+    i[id*="post_meta_style"] {
+        display: flex;
+        align-items: center;
+        margin: 0 0 10px 0;
+    }
+</style>
+
+<article class="post-single">
+    <div id="single-content">
+        <header class="post-header">
+            <div class="breadcrumbs"><a href="https://banbu1118.github.io/">🏠 主页</a>&nbsp;»&nbsp;<a href="https://banbu1118.github.io/posts/">📚文章</a>&nbsp;»&nbsp;<a href="https://banbu1118.github.io/posts/ops/">🧱 运维</a></div>
+            <h1 class="post-title">
+                Pve Ceph超融合环境部署
+            </h1>
+            <div class="post-meta">
+
+<style>
+    i[id*="post_meta_style"] {
+        display: flex;
+        align-items: center;
+        margin: 0 0 10px 0;
+    }
+
+    .parent-post-meta {
+        display: flex;
+        flex-wrap: wrap;
+        opacity: 0.8;
+    }
+</style>
+
+<span class="parent-post-meta">
+    <span id="post_meta_style_1">
+        <span class="fa fa-calendar-check-o"></span>
+        <span>2024-02-29
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    
+    
+    
+    
+    
+    
+    
+    <span id="post_meta_style_3">
+        <span class="fa fa-file-word-o"></span>
+        <span>2117字
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_4">
+        <span class="fa fa-clock-o"></span>
+        <span>5分钟
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_5">
+        <span class="fa fa-user-o"></span>
+        <span>Banbu1118
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_6">
+        <span class="fa fa-tags" style="opacity: 0.8"></span>
+        <span>
+            <span class="post-tags-meta">
+            </span>
+        </span>
+    </span>
+</span>
+<span style="opacity: 0.8;">
+                    <span id="post_meta_style_7">
+                        &nbsp;&nbsp;
+                        <span class="fa fa-eye" ></span>
+                        <span>
+                            <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+                            &nbsp;&nbsp;
+                        </span>
+                    </span>
+                    <span id="post_meta_style_8">
+                        <span class="fa fa-commenting-o"></span>
+                        <span>
+                            <script src="https://cdn.staticfile.org/twikoo/1.5.8/twikoo.all.min.js"></script>
+                            <script>
+                                let url = document.documentURI
+                                
+                                let dnsUrl = "https://banbu1118.github.io/"
+                                let urlSplit = url.split(dnsUrl)
+                                let finalUrl = urlSplit[1]
+                                if (finalUrl[0] !== '/') {
+                                    finalUrl = '/'+finalUrl
+                                }
+                                twikoo.getCommentsCount({
+                                    envId:  null , 
+                                region:  null , 
+                                urls: [ 
+                                    
+                                    finalUrl,
+                                ],
+                                    includeReply: false 
+                                }).then(function (res) {
+                                    let count = res[0].count
+                                    const obj = document.getElementById("comment_count");
+                                    obj.innerText = count
+                                    
+                                    
+                                    
+                                }).catch(function (err) {
+                                    
+                                    console.error(err);
+                                });
+                            </script>
+                            <span id="comment_count"></span>
+                        </span>
+                    </span>
+                </span>
+
+</div>
+        </header> <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">目录</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e9%83%a8%e7%bd%b2%e8%a6%81%e6%b1%82" aria-label="部署要求">部署要求</a></li>
+                <li>
+                    <a href="#%e5%ae%89%e8%a3%85%e6%ad%a5%e9%aa%a4" aria-label="安装步骤">安装步骤</a></li>
+                <li>
+                    <a href="#%e6%8e%92%e9%94%99%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" aria-label="排错常用命令">排错常用命令</a>
+                </li>
+            </ul>
+        </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+        
+        activeElement = elements[0];
+        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+    }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        
+        if (elements) {
+            activeElement = Array.from(elements).find((element) => {
+                if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
+                    (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                    return element;
+                }
+            }) || activeElement
+
+            elements.forEach(element => {
+                const id = encodeURI(element.getAttribute('id')).toLowerCase();
+                if (element === activeElement){
+                    document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+                } else {
+                    document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+                }
+            })
+        }
+    }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;
+    }
+</script>
+        <div class="post-content"><h3 id="部署要求">部署要求<a hidden class="anchor" aria-hidden="true" href="#部署要求">#</a></h3>
+<ul>
+<li>部署最低要求</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>3台服务器
+</span></span><span style="display:flex;"><span>万兆网络
+</span></span><span style="display:flex;"><span>12块OSD硬盘（系统盘单独算）
+</span></span></code></pre></div><ul>
+<li>ceph存储</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>每台Server有5块盘，共15块，其中3块为pve系统盘，剩余12块为ceph的osd盘
+</span></span><span style="display:flex;"><span>其中ceph推荐使用ssd，如果有上百个机械也可不用ssd，ceph的速度和osd数量成正比
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ceph的Cluster Network流量较大，为不影响业务，推荐单独接一个交换机
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ceph的硬盘模式推荐为直通模式，raid会影响其crush算法的存储效率
+</span></span></code></pre></div><ul>
+<li>网络规划</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>服务器</th>
+<th>pve管理网络</th>
+<th>pve业务网络</th>
+<th>Public Network</th>
+<th>Cluster Network</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>server-1</td>
+<td>192.168.1.110</td>
+<td>192.168.1.110</td>
+<td>10.0.0.10</td>
+<td>172.16.1.10</td>
+</tr>
+<tr>
+<td>server-1</td>
+<td>192.168.1.120</td>
+<td>192.168.1.120</td>
+<td>10.0.0.20</td>
+<td>172.16.1.20</td>
+</tr>
+<tr>
+<td>server-1</td>
+<td>192.168.1.130</td>
+<td>192.168.1.130</td>
+<td>10.0.0.30</td>
+<td>172.16.1.30</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>网络架构图</li>
+</ul>
+<p><img loading="lazy" src="../images/1.png" alt="网络架构图"  />
+</p>
+<h3 id="安装步骤">安装步骤<a hidden class="anchor" aria-hidden="true" href="#安装步骤">#</a></h3>
+<p>！！！注意：每台服务器都要配置，具体看安装步骤</p>
+<ul>
+<li>修改主机名（每台主机名不能重复）</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hostnamectl set-hostname pve-ceph01
+</span></span></code></pre></div><ul>
+<li>设置/etc/hosts主机名</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#nano /etc/hosts</span>
+</span></span><span style="display:flex;"><span>192.168.1.151 pve-ceph01.localhost pve-ceph01
+</span></span></code></pre></div><ul>
+<li>pve7或pve8换中科大源</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Backup original sources.list</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -e /etc/apt/sources.list <span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">then</span> cp /etc/apt/sources.list /etc/apt/sources.list.bak
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Backup pve-no-subscription.list</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -e /etc/apt/sources.list.d/pve-no-subscription.list <span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">then</span> cp /etc/apt/sources.list.d/pve-no-subscription.list /etc/apt/sources.list.d/pve-no-subscription.list.bak
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Backup pve-enterprise.list</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -e /etc/apt/sources.list.d/pve-enterprise.list <span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">then</span> cp /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Backup ceph.list</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -e /etc/apt/sources.list.d/ceph.list <span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">then</span> cp /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.list.bak
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Backup pveceph.pm</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -e /usr/share/perl5/PVE/CLI/pveceph.pm <span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">then</span> cp /usr/share/perl5/PVE/CLI/pveceph.pm /usr/share/perl5/PVE/CLI/pveceph.pm.bak
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Determine Proxmox VE version</span>
+</span></span><span style="display:flex;"><span>pve_version<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>pveversion|awk -F <span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#e6db74">&#39;{print $2}&#39;</span>|cut -c1<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#prohibit pve-enterprise</span>
+</span></span><span style="display:flex;"><span>sed -i <span style="color:#e6db74">&#39;1s/^/# /&#39;</span>  /etc/apt/sources.list.d/pve-enterprise.list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Update sources.list with ustc mirror based on the detected Proxmox VE version</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $pve_version <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;7&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/debian bullseye main contrib
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/debian bullseye-updates main contrib
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># security updates
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span> &gt; /etc/apt/sources.list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span> &gt;  /etc/apt/sources.list.d/pve-no-subscription.list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb http://mirrors.ustc.edu.cn/proxmox/debian/ceph-quincy bullseye main
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span> &gt; /etc/apt/sources.list.d/ceph.list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 换中科大源，一定要修改这里，不然每次面板安装ceph时他会根据这里的配置生成 ceph.list 源文件</span>
+</span></span><span style="display:flex;"><span>sed -i  <span style="color:#e6db74">&#34;s#http://download.proxmox.com/debian#https://mirrors.ustc.edu.cn/proxmox/debian#g&#34;</span> /usr/share/perl5/PVE/CLI/pveceph.pm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> $pve_version <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;8&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/debian bookworm main contrib
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/debian bookworm-updates main contrib
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># security updates
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/debian-security bookworm-security main contrib
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span> &gt; /etc/apt/sources.list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bookworm pve-no-subscription
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span> &gt;  /etc/apt/sources.list.d/pve-no-subscription.list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://mirrors.ustc.edu.cn/proxmox/debian/ceph-quincy/ bookworm no-subscription
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span> &gt; /etc/apt/sources.list.d/ceph.list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 换中科大源，一定要修改这里，不然每次面板安装ceph时他会根据这里的配置生成 ceph.list 源文件</span>
+</span></span><span style="display:flex;"><span>sed -i <span style="color:#e6db74">&#39;s|http://download.proxmox.com|https://mirrors.ustc.edu.cn/proxmox|g&#39;</span> /usr/share/perl5/PVE/CLI/pveceph.pm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Unsupported Proxmox VE version.&#34;</span>
+</span></span><span style="display:flex;"><span>    exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Update package index</span>
+</span></span><span style="display:flex;"><span>apt update
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;APT sources have been updated with ustc mirror for Proxmox VE </span>$pve_version<span style="color:#e6db74">.&#34;</span>
+</span></span></code></pre></div><ul>
+<li>更新索引和时间同步</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#安装ntp服务</span>
+</span></span><span style="display:flex;"><span>apt install ntpdate -y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#与阿里云时间服务器时间同步，内网也可指定时间同步服务器（具体操作百度）</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;0 0 * * 6     ntpdate ntp1.aliyun.com&#34;</span> &gt;&gt; /var/spool/cron/crontabs/root
+</span></span></code></pre></div><ul>
+<li>配置ceph网络</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#编辑/etc/network/interfaces，增加cluster network和public network</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#此处网卡为ens19和ens20，实际部署看情况，也可在web界面配置ip</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>auto lo
+</span></span><span style="display:flex;"><span>iface lo inet loopback
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>iface ens18 inet manual
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>auto ens19
+</span></span><span style="display:flex;"><span>iface ens19 inet static
+</span></span><span style="display:flex;"><span>        address 10.0.0.10/24
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>auto ens20
+</span></span><span style="display:flex;"><span>iface ens20 inet static
+</span></span><span style="display:flex;"><span>        address 172.16.1.10/24
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>auto vmbr0
+</span></span><span style="display:flex;"><span>iface vmbr0 inet static
+</span></span><span style="display:flex;"><span>        address 192.168.1.110/24
+</span></span><span style="display:flex;"><span>        gateway 192.168.1.1
+</span></span><span style="display:flex;"><span>        bridge-ports ens18
+</span></span><span style="display:flex;"><span>        bridge-stp off
+</span></span><span style="display:flex;"><span>        bridge-fd <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#重启networking让配置生效</span>
+</span></span><span style="display:flex;"><span>systemctl restart networking
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#检测配置的ip是否生效</span>
+</span></span><span style="display:flex;"><span>hostname -I
+</span></span></code></pre></div><ul>
+<li>核实服务器之间的带宽，确保网络质量满足部署ceph的要求</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#安装iperf</span>
+</span></span><span style="display:flex;"><span>apt install iperf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#测试server-1和server-2之间的带宽</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#server-1作为服务端</span>
+</span></span><span style="display:flex;"><span>iperf -s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#server作为客户端,10.0.0.10和172.16.1.10为sever-1的public network 与cluster network</span>
+</span></span><span style="display:flex;"><span>iperf -c 10.0.0.10
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>iperf -c 172.16.1.10
+</span></span></code></pre></div><ul>
+<li>创建集群（此步骤只在一台服务器操作）</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#创建一个名为pve的集群</span>
+</span></span><span style="display:flex;"><span>pvecm create  pve
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#检测集群状态</span>
+</span></span><span style="display:flex;"><span>pvecm status
+</span></span></code></pre></div><ul>
+<li>其他服务器加入集群</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#这个ip为pve的管理ip/业务ip</span>
+</span></span><span style="display:flex;"><span>pvecm add 192.168.1.110
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#检测集群状态</span>
+</span></span><span style="display:flex;"><span>pvecm status
+</span></span></code></pre></div><ul>
+<li>安装ceph</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#pve7安装ceph的quincy版本</span>
+</span></span><span style="display:flex;"><span>pveceph install --version quincy --allow-experimental <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pve8安装ceph的reef版本</span>
+</span></span><span style="display:flex;"><span>pveceph install --version reef --repository no-subscription --allow-experimental <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><ul>
+<li>ceph网络初始化（此步骤只在一台服务器操作）</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pveceph init --network 10.0.0.10/24 --cluster-network 172.16.1.10/24
+</span></span></code></pre></div><ul>
+<li>增加ceph 监视器和管理器(提高集群高可用)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#创建监视器</span>
+</span></span><span style="display:flex;"><span>pveceph mon create
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#创建管理器</span>
+</span></span><span style="display:flex;"><span>pveceph mgr create
+</span></span></code></pre></div><ul>
+<li>创建osd盘</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#检测可以用来创建OSD的磁盘</span>
+</span></span><span style="display:flex;"><span>lsblk
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#创建OSD盘，此处为sdb，具体部署看实际情况</span>
+</span></span><span style="display:flex;"><span>pveceph osd create /dev/sdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#如果磁盘以前正在使用（例如，用于 ZFS 或作为 OSD），则首先需要清除该使用的所有痕迹。要删除分区表、引导扇区和任何其他剩余的 OSD，可以使用以下命令</span>
+</span></span><span style="display:flex;"><span>ceph-volume lvm zap /dev/sd<span style="color:#f92672">[</span>X<span style="color:#f92672">]</span> --destroy
+</span></span></code></pre></div><ul>
+<li>创建存储池（此步骤只在一台服务器操作）</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pveceph pool create deskpool --add_storages
+</span></span></code></pre></div><h3 id="排错常用命令">排错常用命令<a hidden class="anchor" aria-hidden="true" href="#排错常用命令">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#！！！以下内容ceph供排错使用</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#查看ceph集群状态</span>
+</span></span><span style="display:flex;"><span>seph -s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#查看管理节点</span>
+</span></span><span style="display:flex;"><span>ceph mon stat
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#查看监视节点</span>
+</span></span><span style="display:flex;"><span>ceph mgr stat
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#查看osdh状态和osd目录树</span>
+</span></span><span style="display:flex;"><span>ceph osd stat
+</span></span><span style="display:flex;"><span>ceph osd tree
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#查看ceph的io</span>
+</span></span><span style="display:flex;"><span>ceph iostat
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#下线osd</span>
+</span></span><span style="display:flex;"><span>ceph osd down <span style="color:#ae81ff">0</span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#让编号为0的osd down掉，此时该osd不接受读写请求，但仍然活着</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#拉起osd</span>
+</span></span><span style="display:flex;"><span>ceph osd up <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#让编号为0的osd up，此时该osd接受读写请求</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#将osd逐出集群</span>
+</span></span><span style="display:flex;"><span>ceph osd out <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#将一个编号为0的osd逐出集群，此时可以做维护</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#将osd加入集群</span>
+</span></span><span style="display:flex;"><span>ceph osd in <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#将一个编号为0的osd加入集群</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#删除osd</span>
+</span></span><span style="display:flex;"><span>ceph osd rm <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#在集群中删除一个 osd,可能需要先 stop 该 osd,即 stop osd.0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#删除host节点：ceph osd crush rm node1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#在集群中删除一个host节点</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#创建pool池：ceph osd pool create vms(名称) 64(64是PG)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#CEPH服务常用命令</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#重启mon服务</span>
+</span></span><span style="display:flex;"><span>systemctl restart ceph-mon.target
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#重启osd服务</span>
+</span></span><span style="display:flex;"><span>sysetmctl restart ceph-osd.target
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#重启mgr服务</span>
+</span></span><span style="display:flex;"><span>systemctl restart ceph-mgr.target
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#删除pve节点</span>
+</span></span><span style="display:flex;"><span>在正常节点上踢出故障节点
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#查看集群成员 + 查看集群状态</span>
+</span></span><span style="display:flex;"><span>pvecm nodes
+</span></span><span style="display:flex;"><span>pvecm status
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#在pve集群中删除故障节点</span>
+</span></span><span style="display:flex;"><span>pvecm delnode $hostname
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#删除 故障节点的 ceph节点中故障的 mon信息（前提是有的话）</span>
+</span></span><span style="display:flex;"><span>ceph mon remove $hostname
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#删除故障节点上osd相关信息</span>
+</span></span><span style="display:flex;"><span>ceph osd crush remove osd.$id
+</span></span><span style="display:flex;"><span>ceph auth del osd.$id
+</span></span><span style="display:flex;"><span>ceph osd rm osd.$id
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>在故障节点上，清除集群信息，单机运行
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#首先在待隔离节点上停止 pve-cluster 服务</span>
+</span></span><span style="display:flex;"><span>systemctl stop pve-cluster.service
+</span></span><span style="display:flex;"><span>systemctl stop corosync.service
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#将待隔离节点的集群文件系统设置为本地模式</span>
+</span></span><span style="display:flex;"><span>pmxcfs -l
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#接下来删除 corosync 配置文件</span>
+</span></span><span style="display:flex;"><span>rm /etc/pve/corosync.conf
+</span></span><span style="display:flex;"><span>rm -rf /etc/corosync/*
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#最后重新启动集群文件系统服务</span>
+</span></span><span style="display:flex;"><span>killall pmxcfs        <span style="color:#75715e">#停止集群文件系统服务</span>
+</span></span><span style="display:flex;"><span>systemctl start pve-cluster.service
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pg重建</span>
+</span></span><span style="display:flex;"><span>ceph osd force-create-pg 1.0 --yes-i-really-mean-it
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#命令创建osd盘</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##此处的sdb具体看你添加的磁盘，可以lsblk查看</span>
+</span></span><span style="display:flex;"><span>pveceph osd create /dev/sdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#彻底卸载ceph</span>
+</span></span><span style="display:flex;"><span>systemctl stop ceph-mon.target
+</span></span><span style="display:flex;"><span>systemctl stop ceph-mgr.target
+</span></span><span style="display:flex;"><span>systemctl stop ceph-mds.target
+</span></span><span style="display:flex;"><span>systemctl stop ceph-osd.target
+</span></span><span style="display:flex;"><span>rm -rf /etc/systemd/system/ceph*
+</span></span><span style="display:flex;"><span>killall -9 ceph-mon ceph-mgr ceph-mds
+</span></span><span style="display:flex;"><span>rm -rf /var/lib/ceph/mon/  /var/lib/ceph/mgr/  /var/lib/ceph/mds/
+</span></span><span style="display:flex;"><span>pveceph purge
+</span></span><span style="display:flex;"><span>apt purge ceph-mon ceph-osd ceph-mgr ceph-mds
+</span></span><span style="display:flex;"><span>apt purge ceph-base ceph-mgr-modules-core
+</span></span><span style="display:flex;"><span>rm -rf /etc/ceph/*
+</span></span><span style="display:flex;"><span>rm -rf /etc/pve/ceph.conf
+</span></span><span style="display:flex;"><span>rm -rf /etc/pve/priv/ceph.*
+</span></span></code></pre></div>
+
+        </div>
+
+        <footer class="post-footer">
+            
+        </footer>
+    </div>
+</article>
+</main>
+
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <span class="topInner">
+        <svg class="topSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z"/>
+        </svg>
+        <span id="read_progress"></span>
+    </span>
+</a>
+
+<script>
+    document.addEventListener('scroll', function (e) {
+        const readProgress = document.getElementById("read_progress");
+        const scrollHeight = document.documentElement.scrollHeight;
+        const clientHeight = document.documentElement.clientHeight;
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        readProgress.innerText = ((scrollTop / (scrollHeight - clientHeight)).toFixed(2) * 100).toFixed(0);
+    })
+</script>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+</script>
+<script>
+    let mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        (function() {
+            document.cookie = "change-themes" + "="+ escape ("false");
+        })()
+
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    });
+</script>
+
+<script>
+    document.body.addEventListener('copy', function (e) {
+        if (window.getSelection().toString() && window.getSelection().toString().length > 50) {
+            let clipboardData = e.clipboardData || window.clipboardData;
+            if (clipboardData) {
+                e.preventDefault();
+                let htmlData = window.getSelection().toString() +
+                    '\r\n\n————————————————\r\n' +
+                    '版权声明：本文为「'+"Banbu1118's Blog"+'」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。' +
+                '\r\n原文链接：' + location.href;
+                let textData = window.getSelection().toString() +
+                    '\r\n\n————————————————\r\n' +
+                    '版权声明：本文为「'+"Banbu1118's Blog"+'」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。' +
+                '\r\n原文链接：' + location.href;
+                clipboardData.setData('text/html', htmlData);
+                clipboardData.setData('text/plain', textData);
+            }
+        }
+    });
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = '复制';
+
+        function copyingDone() {
+            copybutton.innerText = '已复制！';
+            setTimeout(() => {
+                copybutton.innerText = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                let text = codeblock.textContent;
+                
+                
+                
+                
+                navigator.clipboard.writeText(text);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) {}
+            selection.removeRange(range);
+        });
+
+        let language = codeblock.className.replaceAll("language-", "")
+        let macTool = document.createElement("div")
+        let macTool1 = document.createElement("div")
+        let macTool2 = document.createElement("div")
+        let macTool3 = document.createElement("div")
+        let languageType = document.createElement("div")
+        languageType.innerText = language
+        macTool.setAttribute('class', 'mac-tool')
+        macTool1.setAttribute('class', 'mac bb1')
+        macTool2.setAttribute('class', 'mac bb2')
+        macTool3.setAttribute('class', 'mac bb3')
+        languageType.setAttribute('class', 'language-type')
+        macTool.appendChild(macTool1)
+        macTool.appendChild(macTool2)
+        macTool.appendChild(macTool3)
+        macTool.appendChild(languageType)
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+            container.appendChild(macTool)
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+            container.appendChild(macTool)
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+            container.appendChild(macTool)
+        }
+    });
+</script>
+</body>
+
+</html>

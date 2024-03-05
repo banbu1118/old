@@ -44,12 +44,12 @@
     </item>
     
     <item>
-      <title>Pve Ceph超融合搭建</title>
-      <link>https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/</link>
+      <title>Pve Ceph超融合环境部署</title>
+      <link>https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</link>
       <pubDate>Thu, 29 Feb 2024 21:50:59 +0800</pubDate>
       
-      <guid>https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/</guid>
-      <description>环境介绍</description>
+      <guid>https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</guid>
+      <description>部署要求 部署最低要求 3台服务器 万兆网络 12块OSD硬盘（系统盘单独算） ceph存储 每台Server有5块盘，共15块，其中3块为pve系统盘，剩余12块为ceph的osd盘 其中ceph推荐使用ssd，如果有上百个机械也可不用ssd，ceph的速度和osd数量成正比 ceph的Clu</description>
     </item>
     
     <item>
