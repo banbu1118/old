@@ -16,14 +16,5 @@
       <description>#!/bin/bash #安装imagemagick工具 apt install imagemagick -y # 设置图片参数 width=600 height=800 background_color=&amp;#34;lightblue&amp;#34; text_color=&amp;#34;white&amp;#34; output_file=&amp;#34;opendesk_image_imagemagick.png&amp;#34; text=&amp;#34;OpenDesk&amp;#34; # 生成图片 convert -size ${width}x${height} xc:${background_color} -fill ${text_color} \ -gravity center -pointsize 48 -annotate +0+0 &amp;#34;${text}&amp;#34; ${output_file} echo &amp;#34;图片已生成：${output_file}&amp;#34;</description>
     </item>
     
-    <item>
-      <title>OpenDesk</title>
-      <link>https://banbu1118.github.io/posts/dev/opendesk/</link>
-      <pubDate>Thu, 14 Dec 2023 21:58:39 +0800</pubDate>
-      
-      <guid>https://banbu1118.github.io/posts/dev/opendesk/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>

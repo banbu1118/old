@@ -19,6 +19,7 @@
 <link rel="mask-icon" href="https://banbu1118.github.io/img/Q.jpg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh" href="https://banbu1118.github.io/posts/ops/linux%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E5%B8%A6%E5%AE%BD%E5%92%8C%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B/">
 <noscript>
     <style>
         #theme-toggle,
@@ -200,6 +201,8 @@ var _hmt = _hmt || [];
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
+                <ul class="lang-switch"><li></li>
+                </ul>
             </div>
         </div>
         <ul id="menu">
@@ -216,6 +219,11 @@ var _hmt = _hmt || [];
             <li>
                 <a href="https://banbu1118.github.io/posts" title="📚 文章">
                 <span>📚 文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://banbu1118.github.io/tags" title="🧩 标签">
+                <span>🧩 标签</span>
                 </a>
             </li>
             <li>
@@ -299,6 +307,8 @@ var _hmt = _hmt || [];
         <span class="fa fa-tags" style="opacity: 0.8"></span>
         <span>
             <span class="post-tags-meta">
+                <a href="https://banbu1118.github.io/tags/linux/" style="color: var(--secondary)!important;">Linux</a>
+                &nbsp;<a href="https://banbu1118.github.io/tags/%E7%BD%91%E7%BB%9C/" style="color: var(--secondary)!important;">网络</a>
             </span>
         </span>
     </span>
@@ -503,7 +513,7 @@ var _hmt = _hmt || [];
 
         copybutton.addEventListener('click', (cb) => {
             if ('clipboard' in navigator) {
-                let text = codeblock.textContent;
+                let text = codeblock.textContent 
                 
                 
                 

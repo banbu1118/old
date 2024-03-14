@@ -89,15 +89,6 @@
     </item>
     
     <item>
-      <title>Pve7升级pve8一键脚本</title>
-      <link>https://banbu1118.github.io/posts/ops/pve7%E5%8D%87%E7%BA%A7pve8%E4%B8%80%E9%94%AE%E8%84%9A%E6%9C%AC/</link>
-      <pubDate>Wed, 03 Jan 2024 23:15:46 +0800</pubDate>
-      
-      <guid>https://banbu1118.github.io/posts/ops/pve7%E5%8D%87%E7%BA%A7pve8%E4%B8%80%E9%94%AE%E8%84%9A%E6%9C%AC/</guid>
-      <description>#/bin/bash #pve升级检查 pve7to8 pve7to8 --full #查看版本 #pveversion #更换为pve8的源 echo &amp;#34; deb https://mirrors.ustc.edu.cn/debian bookworm main contrib deb https://mirrors.ustc.edu.cn/debian bookworm-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bookworm-security main contrib &amp;#34; &amp;gt; /etc/apt/sources.list echo &amp;#34; deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bookworm pve-no-subscription &amp;#34; &amp;gt; /etc/apt/sources.list.d/pve-no-subscription.list #开始升级pve8 apt update -y apt dist-upgrade -y</description>
-    </item>
-    
-    <item>
       <title>Pve7和8一键换源脚本</title>
       <link>https://banbu1118.github.io/posts/ops/pve7%E5%92%8C8%E4%B8%80%E9%94%AE%E6%8D%A2%E6%BA%90%E8%84%9A%E6%9C%AC/</link>
       <pubDate>Wed, 27 Dec 2023 20:18:16 +0800</pubDate>
@@ -135,10 +126,10 @@
     
     <item>
       <title>Docker学习笔记</title>
-      <link>https://banbu1118.github.io/posts/ops/dock%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <link>https://banbu1118.github.io/posts/ops/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Thu, 14 Dec 2023 22:10:50 +0800</pubDate>
       
-      <guid>https://banbu1118.github.io/posts/ops/dock%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://banbu1118.github.io/posts/ops/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
       <description>前言 一、Docker为什么会出现 解决运维开发过程中部署环境的冲突 二、Docker历史 2013年发布 三、Docker的思想 集装箱 标准化 隔离性 四、Docker的优势 快速部署，节约资源 五、Docker基本组成 客户端、服务器、仓库 镜像（imag）：镜像文件 容器（container）：运行</description>
     </item>
     

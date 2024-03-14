@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Lfs on Banbu1118&#39;s Blog</title>
+    <link>https://banbu1118.github.io/tags/lfs/</link>
+    <description>Recent content in Lfs on Banbu1118&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sat, 02 Mar 2024 00:38:32 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/tags/lfs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux_From_Scratch_中文翻译</title>
+      <link>https://banbu1118.github.io/posts/read/linux_from_scratch_%E4%B8%AD%E6%96%87%E7%BF%BB%E8%AF%91/</link>
+      <pubDate>Sat, 02 Mar 2024 00:38:32 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/read/linux_from_scratch_%E4%B8%AD%E6%96%87%E7%BF%BB%E8%AF%91/</guid>
+      <description>Linux From Scratch-从零开始构建Linux系统 Linux From Scratch 中文翻译手册链接</description>
+    </item>
+    
+  </channel>
+</rss>

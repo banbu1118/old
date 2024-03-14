@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>V2ray on Banbu1118&#39;s Blog</title>
+    <link>https://banbu1118.github.io/tags/v2ray/</link>
+    <description>Recent content in V2ray on Banbu1118&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Thu, 14 Dec 2023 22:00:50 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/tags/v2ray/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vpn快速搭建</title>
+      <link>https://banbu1118.github.io/posts/ops/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Thu, 14 Dec 2023 22:00:50 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/vpn%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/</guid>
+      <description>注意事项 购买国外云服务器（香港和澳门的服务器也不推荐） 推荐使用腾讯云或阿里云的抢占式云服务器，价格便宜，注意实例释放时间！！！！ ssr 参考链接：https://thetowerinfo.com/zh/setup-shadowsocks-server-china/ 获取ssr安装脚本 wget --no-check-certificate</description>
+    </item>
+    
+  </channel>
+</rss>

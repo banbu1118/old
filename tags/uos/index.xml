@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Uos on Banbu1118&#39;s Blog</title>
+    <link>https://banbu1118.github.io/tags/uos/</link>
+    <description>Recent content in Uos on Banbu1118&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 25 Dec 2023 19:20:02 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/tags/uos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Uos Kylin Lvm扩容</title>
+      <link>https://banbu1118.github.io/posts/ops/uos-kylin-lvm%E6%89%A9%E5%AE%B9/</link>
+      <pubDate>Mon, 25 Dec 2023 19:20:02 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/uos-kylin-lvm%E6%89%A9%E5%AE%B9/</guid>
+      <description>kylin磁盘扩容 前提 kylin安装时选择了lvm模式 虚拟机关闭状态下调整磁盘大小 开机后，使用终端扩容 3.1 查看分区情况，发现sda磁盘已扩容，但是系统本身并未自动扩容 administrator@pc:~$ sudo lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT sda 8:0 0 150G 0 disk ├─sda1 8:1 0 2G 0 part /boot ├─sda2 8:2 0 1K 0 part └─sda5 8:5 0 98G 0 part ├─kylin-</description>
+    </item>
+    
+  </channel>
+</rss>

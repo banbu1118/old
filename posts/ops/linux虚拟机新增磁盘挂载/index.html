@@ -19,6 +19,7 @@
 <link rel="mask-icon" href="https://banbu1118.github.io/img/Q.jpg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh" href="https://banbu1118.github.io/posts/ops/linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%B0%E5%A2%9E%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD/">
 <noscript>
     <style>
         #theme-toggle,
@@ -123,8 +124,8 @@ var _hmt = _hmt || [];
   "keywords": [
     ""
   ],
-  "articleBody": " 查看磁盘是否挂载 #查看磁盘是否挂载 lsblk #注意：新添加的磁盘需要重启虚拟机才能显示添加成功 分区 #使用cfdisk或fdisk进行分区 fdisk /dev/sdb #开始对/sdb 分区 m 显示命令列表 p 显示磁盘分区 同 fdisk –l n 新增分区 d 删除分区 w 写入并退出  说明： 开始分区后输入 n，新增分区，然后选择 p ，分区类型为主分区。两次回车默认剩余全部空间。最后输入 w 写入分区并退出，若不保存退出输入 q 格式化分区 #lsblk -f 查看分区相关信息，分区没格式化还不能用 root@debian:~# lsblk -f NAME FSTYPE FSVER LABEL UUID FSAVAIL FSUSE% MOUNTPOINTS sda ├─sda1 ext4 1.0 229516e6-3292-4450-ad60-a875f6c86f63 84.5G 8% / ├─sda2 └─sda5 swap 1 f34e6bd4-4bf6-4968-9f2d-53492d01abdc [SWAP] sdb └─sdb1 #没有发现唯一的40位标识符，说明没有被格式化 sr0 #分配40位唯一标识符，格式化分区 mkfs -t ext4 /dev/sdb1 #lsblk -f查看是否格式化完成 root@debian:~# lsblk -f NAME FSTYPE FSVER LABEL UUID FSAVAIL FSUSE% MOUNTPOINTS sda ├─sda1 ext4 1.0 229516e6-3292-4450-ad60-a875f6c86f63 84.5G 8% / ├─sda2 └─sda5 swap 1 f34e6bd4-4bf6-4968-9f2d-53492d01abdc [SWAP] sdb └─sdb1 ext4 1.0 e65cfa9d-9f00-4352-a0d1-033576b545d4 #已生成有唯一标识符 sr0 挂载 #临时挂载 #新建目录命令 mkdir /kk #提升权限（选做） chmod 777 /kk #挂载 mount /dev/sdb1 /kk/ ##永久挂载 nano /etc/fstab #末尾添加一行 /dev/sdb1 /kk ext4 defaults 0 0 ",
-  "wordCount" : "424",
+  "articleBody": " 查看磁盘是否挂载 #查看磁盘是否挂载 lsblk #注意：新添加的磁盘需要重启虚拟机才能显示添加成功 分区 #使用cfdisk或fdisk进行分区 fdisk /dev/sdb #开始对/sdb 分区 m 显示命令列表 p 显示磁盘分区 同 fdisk –l n 新增分区 d 删除分区 w 写入并退出  说明： 开始分区后输入 n，新增分区，然后选择 p ，分区类型为主分区。两次回车默认剩余全部空间。最后输入 w 写入分区并退出，若不保存退出输入 q 格式化分区 #lsblk -f 查看分区相关信息，分区没格式化还不能用 root@debian:~# lsblk -f NAME FSTYPE FSVER LABEL UUID FSAVAIL FSUSE% MOUNTPOINTS sda ├─sda1 ext4 1.0 229516e6-3292-4450-ad60-a875f6c86f63 84.5G 8% / ├─sda2 └─sda5 swap 1 f34e6bd4-4bf6-4968-9f2d-53492d01abdc [SWAP] sdb └─sdb1 #没有发现唯一的40位标识符，说明没有被格式化 sr0 #分配40位唯一标识符，格式化分区 mkfs -t ext4 /dev/sdb1 #lsblk -f查看是否格式化完成 root@debian:~# lsblk -f NAME FSTYPE FSVER LABEL UUID FSAVAIL FSUSE% MOUNTPOINTS sda ├─sda1 ext4 1.0 229516e6-3292-4450-ad60-a875f6c86f63 84.5G 8% / ├─sda2 └─sda5 swap 1 f34e6bd4-4bf6-4968-9f2d-53492d01abdc [SWAP] sdb └─sdb1 ext4 1.0 e65cfa9d-9f00-4352-a0d1-033576b545d4 #已生成有唯一标识符 sr0 挂载 #临时挂载 #新建目录命令 mkdir /kk #提升权限（选做） chmod 777 /kk #挂载 mount /dev/sdb1 /kk/ ##永久挂载 nano /etc/fstab #末尾添加一行 /dev/sdb1 /kk ext4 defaults 0 0 使用UUID自动挂载 #末尾添加一行 nano /etc/fstab UUID=e65cfa9d-9f00-4352-a0d1-033576b545d4\t/kk ext4 defaults 0 0 ",
+  "wordCount" : "449",
   "inLanguage": "zh",
   "datePublished": "2024-03-02T00:23:20+08:00",
   "dateModified": "2024-03-02T00:23:20+08:00",
@@ -200,6 +201,8 @@ var _hmt = _hmt || [];
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
+                <ul class="lang-switch"><li></li>
+                </ul>
             </div>
         </div>
         <ul id="menu">
@@ -216,6 +219,11 @@ var _hmt = _hmt || [];
             <li>
                 <a href="https://banbu1118.github.io/posts" title="📚 文章">
                 <span>📚 文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://banbu1118.github.io/tags" title="🧩 标签">
+                <span>🧩 标签</span>
                 </a>
             </li>
             <li>
@@ -279,7 +287,7 @@ var _hmt = _hmt || [];
     
     <span id="post_meta_style_3">
         <span class="fa fa-file-word-o"></span>
-        <span>424字
+        <span>449字
             &nbsp;&nbsp;
         </span>
     </span>
@@ -299,6 +307,8 @@ var _hmt = _hmt || [];
         <span class="fa fa-tags" style="opacity: 0.8"></span>
         <span>
             <span class="post-tags-meta">
+                <a href="https://banbu1118.github.io/tags/linux/" style="color: var(--secondary)!important;">Linux</a>
+                &nbsp;<a href="https://banbu1118.github.io/tags/%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD/" style="color: var(--secondary)!important;">磁盘挂载</a>
             </span>
         </span>
     </span>
@@ -419,6 +429,12 @@ var _hmt = _hmt || [];
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#末尾添加一行</span>
 </span></span><span style="display:flex;"><span>/dev/sdb1    /kk    ext4    defaults    <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><ul>
+<li>使用UUID自动挂载</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#末尾添加一行</span>
+</span></span><span style="display:flex;"><span>nano /etc/fstab
+</span></span><span style="display:flex;"><span>UUID<span style="color:#f92672">=</span>e65cfa9d-9f00-4352-a0d1-033576b545d4	/kk ext4 defaults <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span>
 </span></span></code></pre></div>
 
         </div>
@@ -541,7 +557,7 @@ var _hmt = _hmt || [];
 
         copybutton.addEventListener('click', (cb) => {
             if ('clipboard' in navigator) {
-                let text = codeblock.textContent;
+                let text = codeblock.textContent 
                 
                 
                 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Linux on Banbu1118&#39;s Blog</title>
+    <link>https://banbu1118.github.io/tags/linux/</link>
+    <description>Recent content in Linux on Banbu1118&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 04 Mar 2024 19:50:03 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux系统网络带宽和网卡状态检测</title>
+      <link>https://banbu1118.github.io/posts/ops/linux%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E5%B8%A6%E5%AE%BD%E5%92%8C%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B/</link>
+      <pubDate>Mon, 04 Mar 2024 19:50:03 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/linux%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E5%B8%A6%E5%AE%BD%E5%92%8C%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B/</guid>
+      <description>带宽测试 #安装iperf apt install iperf #测试server-1和server-2之间的带宽 #server-1作为服务端 iperf -s #server作为客户端,192.168.1.10为sever-1的ip iperf -c 192.168.1.10 网络流量检测 #安装iptop apt install iftop #监控vmbr0的流量 iftop -i vmbr0 查看网卡接口的接口速度 #安装</description>
+    </item>
+    
+    <item>
+      <title>Linux虚拟机新增磁盘挂载</title>
+      <link>https://banbu1118.github.io/posts/ops/linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%B0%E5%A2%9E%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD/</link>
+      <pubDate>Sat, 02 Mar 2024 00:23:20 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%B0%E5%A2%9E%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD/</guid>
+      <description>查看磁盘是否挂载 #查看磁盘是否挂载 lsblk #注意：新添加的磁盘需要重启虚拟机才能显示添加成功 分区 #使用cfdisk或fdisk进行分区 fdisk /dev/sdb #开始对/sdb 分区 m 显示命令列表 p 显示磁盘分区 同 fdisk –l n 新增分区 d 删除分区 w 写入并退出  说明： 开始分区后输入 n，新增分区，然后选择 p ，分区类型为主</description>
+    </item>
+    
+    <item>
+      <title>搭建dhcp服务器</title>
+      <link>https://banbu1118.github.io/posts/ops/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <pubDate>Sat, 16 Dec 2023 19:56:20 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/%E6%90%AD%E5%BB%BAdhcp%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description>搭建dhcp服务 centos7搭建dhcp服务 1.centos7配置静态ip #使用nmtui配置静态ip 安装dhcp yum install dhcp 复制实例文件到配置目录 cp /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example dhcpd.conf 编辑dhcp.conf文件，如下所示 subnet 192.168.8.0 netmask 255.255.255.0 { option domain-name-servers 192.168.8.1; range 192.168.8.100 192.168.8.101; option routers 192.168.8.1; default-lease-time 600; max-lease-time 7200; } # 参考文档：https://blog.csdn.net/</description>
+    </item>
+    
+    <item>
+      <title>添加和删除系统引导</title>
+      <link>https://banbu1118.github.io/posts/ops/%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC/</link>
+      <pubDate>Fri, 15 Dec 2023 21:00:22 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E9%99%A4%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC/</guid>
+      <description>前言 当成功安装系统（windows或linux）后，设备开机找不到引导，无法在bios界面添加时。 可以采用以下方法在uefi shell里添加或删除引导 添加引导 # 查看是否有efi目录，有则继续 ls fs0: # 查看是否有引导目录 ls fs0:\efi # 以pve为例 ls fs0:\efi\proxmox # 添加引导 bcfg boot add 0 fs0:\efi\proxmox\grubx64.efi #添加完成后，进入bio</description>
+    </item>
+    
+  </channel>
+</rss>

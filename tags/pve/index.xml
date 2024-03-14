@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Pve on Banbu1118&#39;s Blog</title>
+    <link>https://banbu1118.github.io/tags/pve/</link>
+    <description>Recent content in Pve on Banbu1118&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 04 Mar 2024 19:42:33 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/tags/pve/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pve7 8 Ceph超融合部署换源脚本</title>
+      <link>https://banbu1118.github.io/posts/ops/pve7-8-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E9%83%A8%E7%BD%B2%E6%8D%A2%E6%BA%90%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Mon, 04 Mar 2024 19:42:33 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve7-8-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E9%83%A8%E7%BD%B2%E6%8D%A2%E6%BA%90%E8%84%9A%E6%9C%AC/</guid>
+      <description>pve7-8-ceph超融合部署换源脚本 #!/bin/bash # Backup original sources.list if [ -e /etc/apt/sources.list ]; then cp /etc/apt/sources.list /etc/apt/sources.list.bak fi # Backup pve-no-subscription.list if [ -e /etc/apt/sources.list.d/pve-no-subscription.list ]; then cp /etc/apt/sources.list.d/pve-no-subscription.list /etc/apt/sources.list.d/pve-no-subscription.list.bak fi # Backup pve-enterprise.list if [ -e /etc/apt/sources.list.d/pve-enterprise.list ]; then cp /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak fi # Backup ceph.list if [ -e /etc/apt/sources.list.d/ceph.list ]; then cp /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.list.bak fi # Backup pveceph.pm if [ -e /usr/share/perl5/PVE/CLI/pveceph.pm ]; then cp /usr/share/perl5/PVE/CLI/pveceph.pm /usr/share/perl5/PVE/CLI/pveceph.pm.bak fi # Determine Proxmox VE version pve_version=$(pveversion|awk -F &amp;#39;/&amp;#39; &amp;#39;{print $2}&amp;#39;|cut -c1) #prohibit pve-enterprise sed -i &amp;#39;1s/^/# /&amp;#39; /etc/apt/sources.list.d/pve-enterprise.list # Update sources.list with ustc mirror based on the detected Proxmox VE version if [[ $pve_version == &amp;#34;7&amp;#34; ]]; then echo &amp;#34; deb https://mirrors.ustc.edu.cn/debian bullseye main contrib deb https://mirrors.ustc.edu.cn/debian bullseye-updates main contrib # security updates</description>
+    </item>
+    
+    <item>
+      <title>Pve Ceph超融合环境部署</title>
+      <link>https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Thu, 29 Feb 2024 21:50:59 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E6%90%AD%E5%BB%BA/pve-ceph%E8%B6%85%E8%9E%8D%E5%90%88%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</guid>
+      <description>部署要求 部署最低要求 3台服务器 万兆网络 12块OSD硬盘（系统盘单独算） ceph存储 每台Server有5块盘，共15块，其中3块为pve系统盘，剩余12块为ceph的osd盘 其中ceph推荐使用ssd，如果有上百个机械也可不用ssd，ceph的速度和osd数量成正比 ceph的Clu</description>
+    </item>
+    
+    <item>
+      <title>Pve改文件存储</title>
+      <link>https://banbu1118.github.io/posts/ops/pve%E6%94%B9%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/</link>
+      <pubDate>Thu, 29 Feb 2024 21:34:19 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve%E6%94%B9%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/</guid>
+      <description>local-lvm改目录存储，提升运行速度 #实测pve7和8都行 pvesh delete /storage/local-lvm umount /dev/pve/data lvremove /dev/pve/data -y vgdisplay pve | grep Free | awk &amp;#39;{print &amp;#34;lvcreate -l &amp;#34; $5 &amp;#34; -n data pve -y&amp;#34;}&amp;#39; |bash mkfs.ext4 /dev/pve/data mkdir /mnt/data mount /dev/pve/data /mnt/data echo &amp;#34;/dev/pve/data /mnt/data ext4 defaults 0 0&amp;#34; &amp;gt;&amp;gt; /etc/fstab pvesm add dir data --path=/mnt/data 详情参考链接 Proxmox的local-lvm改文件存储，提升运行速度</description>
+    </item>
+    
+    <item>
+      <title>Pve离线下载安装包</title>
+      <link>https://banbu1118.github.io/posts/ops/pve%E7%A6%BB%E7%BA%BF%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%8C%85/</link>
+      <pubDate>Wed, 03 Jan 2024 23:29:01 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve%E7%A6%BB%E7%BA%BF%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%8C%85/</guid>
+      <description>前言 #最好确保离线环境和联网环境一致，防止出现依赖关系问题 联网环境下载包 #下载包及其依赖关系，下载的包默认保存在/var/cache/apt/archives中，和以前下载的包一起，不容易分辨，不推荐这个命令 #apt install -d + 安装包名称 #下载包及其依赖关系到指定目录（推荐使用这个） #创建一</description>
+    </item>
+    
+    <item>
+      <title>Pve离线升级系统</title>
+      <link>https://banbu1118.github.io/posts/ops/pve%E7%A6%BB%E7%BA%BF%E5%8D%87%E7%BA%A7%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Wed, 03 Jan 2024 23:26:31 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve%E7%A6%BB%E7%BA%BF%E5%8D%87%E7%BA%A7%E7%B3%BB%E7%BB%9F/</guid>
+      <description>前言 #此教程可以让pve进行小版本的升级，例如，从pve7.4-3升级到pve7.4-17 #最好确保离线环境和联网环境一致，防止出现依赖关系问题 联网升级完成的pve环境 #进去apt下载包的缓存目录 cd /var/cache/apt/ 拷贝文件到离线设备 #拷贝archives文件夹到离线设备的/var/cache/</description>
+    </item>
+    
+    <item>
+      <title>Pve7和8一键换源脚本</title>
+      <link>https://banbu1118.github.io/posts/ops/pve7%E5%92%8C8%E4%B8%80%E9%94%AE%E6%8D%A2%E6%BA%90%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Wed, 27 Dec 2023 20:18:16 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/pve7%E5%92%8C8%E4%B8%80%E9%94%AE%E6%8D%A2%E6%BA%90%E8%84%9A%E6%9C%AC/</guid>
+      <description>#!/bin/bash # Backup original sources.list cp /etc/apt/sources.list /etc/apt/sources.list.bak # Backup ceph.list if [ -e /etc/apt/sources.list.d/ceph.list ]; then cp /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.list.bak fi # Backup pve-no-subscription.list if [ -e /etc/apt/sources.list.d/pve-no-subscription.list ]; then cp /etc/apt/sources.list.d/pve-no-subscription.list /etc/apt//sources.list.d/pve-no-subscription.list.bak fi # Backup pve-enterprise.list cp /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak # Determine Proxmox VE version pve_version=$(pveversion|awk -F &amp;#39;/&amp;#39; &amp;#39;{print $2}&amp;#39;|cut -c1) # prohibit ceph if [ -e /etc/apt/sources.list.d/ceph.list ]; then sed -i &amp;#39;1s/^/# /&amp;#39; /etc/apt/sources.list.d/ceph.list fi #prohibit pve-enterprise sed -i &amp;#39;1s/^/# /&amp;#39; /etc/apt/sources.list.d/pve-enterprise.list # Update sources.list with ustc mirror based on the detected Proxmox VE version if [[ $pve_version == &amp;#34;7&amp;#34; ]]; then echo &amp;#34; deb https://mirrors.ustc.edu.cn/debian bullseye main contrib deb https://mirrors.ustc.edu.cn/debian bullseye-updates main contrib # security updates deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib &amp;#34; &amp;gt; /etc/apt/sources.list echo &amp;#34; deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription &amp;#34; &amp;gt; /etc/apt/sources.list.d/pve-no-subscription.list elif [[ $pve_version == &amp;#34;8&amp;#34; ]]; then echo &amp;#34; deb https://mirrors.ustc.edu.cn/debian bookworm main contrib deb</description>
+    </item>
+    
+  </channel>
+</rss>
