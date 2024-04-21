@@ -6,7 +6,16 @@
     <description>Recent content in 🧱 运维 on Banbu1118&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Tue, 05 Mar 2024 19:19:26 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/posts/ops/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Apr 2024 19:29:34 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/posts/ops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python_http_server</title>
+      <link>https://banbu1118.github.io/posts/ops/python_http_server/</link>
+      <pubDate>Sun, 21 Apr 2024 19:29:34 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/python_http_server/</guid>
+      <description>一次性使用 #启用python的http模块 #指定访问端口为80 #指定路径/share python3 -m http.server 80 -d /share #当前路径，默认端口8000 python3 -m http.server 永久使用 配置systemd服务单元 在/etc/systemd/system/目录下创建systemd服务文件，例如python_http_server</description>
+    </item>
+    
     <item>
       <title>Vgpu Licserver</title>
       <link>https://banbu1118.github.io/posts/ops/vgpu-licserver/</link>

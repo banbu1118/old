@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Python on Banbu1118&#39;s Blog</title>
+    <link>https://banbu1118.github.io/tags/python/</link>
+    <description>Recent content in Python on Banbu1118&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 21 Apr 2024 19:29:34 +0800</lastBuildDate><atom:link href="https://banbu1118.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python_http_server</title>
+      <link>https://banbu1118.github.io/posts/ops/python_http_server/</link>
+      <pubDate>Sun, 21 Apr 2024 19:29:34 +0800</pubDate>
+      
+      <guid>https://banbu1118.github.io/posts/ops/python_http_server/</guid>
+      <description>一次性使用 #启用python的http模块 #指定访问端口为80 #指定路径/share python3 -m http.server 80 -d /share #当前路径，默认端口8000 python3 -m http.server 永久使用 配置systemd服务单元 在/etc/systemd/system/目录下创建systemd服务文件，例如python_http_server</description>
+    </item>
+    
+  </channel>
+</rss>
